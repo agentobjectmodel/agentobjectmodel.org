@@ -1,0 +1,20 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "none",
+    "params": {}
+  },
+  "meta": {
+    "done": false,
+    "confidence": 0.8,
+    "error": {
+      "message": "Login is temporarily unavailable for maintenance."
+    },
+    "a2h_intent": {
+      "type": "ESCALATE",
+      "message": "Login is temporarily unavailable for maintenance.",
+      "escalation_channel": "in_app"
+    }
+  },
+  "thought": "Confidence below threshold; handing over to human."
+}

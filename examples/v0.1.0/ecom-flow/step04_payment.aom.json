@@ -1,0 +1,106 @@
+{
+  "automation_policy": "open",
+  "aom_version": "0.1.0",
+  "surface_id": "app:shop:checkout_payment",
+  "surface_kind": "screen",
+  "purpose": {
+    "primary_goal": "Enter payment and place order.",
+    "user_roles": ["customer"]
+  },
+  "context": {
+    "app_name": "aom.tools",
+    "locale": "en-US"
+  },
+  "tasks": [
+    {
+      "id": "place_order",
+      "label": "Place order",
+      "description": "Confirm payment and place order.",
+      "default_action_id": "place_order",
+      "input_entities": ["PaymentMethod", "OrderSummary"],
+      "output_entities": ["Order"],
+      "success_conditions": ["Order created", "navigate to step05"],
+      "failure_conditions": ["signals.errors length > 0", "Payment declined"]
+    }
+  ],
+  "entities": {
+    "PaymentMethod": {
+      "schema": {
+        "type": { "type": "string", "required": true, "description": "card | paypal | etc." },
+        "last_four": { "type": "string", "required": false, "description": "Last 4 digits" }
+      },
+      "current": { "type": "card", "last_four": "" }
+    },
+    "OrderSummary": {
+      "schema": {
+        "subtotal": { "type": "number", "required": true },
+        "shipping": { "type": "number", "required": true },
+        "total": { "type": "number", "required": true }
+      },
+      "current": { "subtotal": 0, "shipping": 0, "total": 0 }
+    }
+  },
+  "actions": [
+    {
+      "id": "place_order",
+      "label": "Place order",
+      "category": "mutation",
+      "description": "Charge payment and create order.",
+      "priority": 9,
+      "method": "POST",
+      "input_entities": ["PaymentMethod", "OrderSummary"],
+      "output_entities": ["Order"],
+      "effects": ["Order created", "navigate to step05"],
+      "a2h_policy": {
+        "requires_authorization": true,
+        "confidence_threshold": 0.9,
+        "intent_type": "AUTHORIZE",
+        "escalation_channel": "in_app"
+      }
+    },
+    {
+      "id": "back_to_shipping",
+      "label": "Back to shipping",
+      "category": "navigation",
+      "description": "Return to shipping step.",
+      "priority": 3,
+      "method": "GET"
+    }
+  ],
+  "state": {
+    "session": { "authenticated": true, "user_id": "user1234" },
+    "workflow": {
+      "flow_id": "ecom-checkout",
+      "task_id": "place_order",
+      "step_id": "step04"
+    }
+  },
+  "navigation": {
+    "breadcrumbs": [
+      { "label": "Shipping", "surface_id": "app:shop:checkout_shipping" },
+      { "label": "Payment", "surface_id": "app:shop:checkout_payment" }
+    ],
+    "neighbors": [
+      { "surface_id": "app:shop:checkout_shipping", "label": "Back" },
+      { "surface_id": "app:shop:confirmation", "label": "Confirmation" }
+    ]
+  },
+  "a2h": {
+    "confidence_threshold": 0.9,
+    "default_intent_type": "AUTHORIZE",
+    "escalation_channel": "in_app"
+  },
+  "signals": {
+    "errors": [],
+    "warnings": [],
+    "notifications": [],
+    "test_cases": [
+      { "name": "success", "errors": [], "expected": { "order_id": "ord_001", "status": "confirmed", "next_step_id": "step05" } },
+      { "name": "payment_declined", "errors": ["Your payment was declined. Please try another method."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "invalid_card", "errors": ["Please check your card details."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "insufficient_funds", "errors": ["Insufficient funds."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "expired_card", "errors": ["This card has expired."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "cvv_required", "errors": ["Please enter the security code (CVV)."], "intent_type": "ESCALATE", "escalation_channel": "in_app" }
+    ]
+  }
+}

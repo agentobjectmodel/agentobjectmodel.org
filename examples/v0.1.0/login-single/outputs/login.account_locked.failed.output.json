@@ -1,0 +1,20 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "none",
+    "params": {}
+  },
+  "meta": {
+    "done": false,
+    "confidence": 0.8,
+    "error": {
+      "message": "Account is locked due to too many failed attempts. Try again in 15 minutes or reset your password."
+    },
+    "a2h_intent": {
+      "type": "ESCALATE",
+      "message": "Account is locked due to too many failed attempts. Try again in 15 minutes or reset your password.",
+      "escalation_channel": "email"
+    }
+  },
+  "thought": "Confidence below threshold; handing over to human."
+}

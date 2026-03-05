@@ -1,0 +1,536 @@
+{
+  "$id": "https://agentobjectmodel.org/schemas/aom-core.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Object Model (AOM)™ Core Schema",
+  "description": "Core schema for representing an interactive interface as an Agent Object Model (AOM)™. Provides a task- and entity-centric JSON format for AI agents, replacing the visual DOM with semantic actions, state, and A2H policies.",
+  "version": "0.1.0",
+  "type": "object",
+  "required": [
+    "aom_version",
+    "surface_id",
+    "surface_kind",
+    "purpose",
+    "context",
+    "tasks",
+    "entities",
+    "actions",
+    "state",
+    "navigation",
+    "signals"
+  ],
+  "properties": {
+    "automation_policy": {
+      "type": "string",
+      "enum": ["allowed", "forbidden", "open"],
+      "description": "Agent automation policy for this surface (or site default). Semantics: forbidden = no automation; agents may read only enough AOM/policy to learn this rule, then MUST stop using this surface. allowed = READY / guardrailed mode; agents MUST treat the AOM as the only source of truth for actions and MUST NOT act based on DOM/HTML or other page content outside the AOM. open = permissive mode; agents MAY go beyond the explicit AOM-described actions using additional page content, while still obeying global safety rules. Omit for backward compatibility (treated as allowed unless site policy says otherwise).",
+      "default": "allowed"
+    },
+    "aom_version": {
+      "type": "string",
+      "description": "Version of the AOM spec this document conforms to.",
+      "examples": [
+        "1.0.0"
+      ]
+    },
+    "surface_id": {
+      "type": "string",
+      "description": "Stable identifier for this AOM surface in the format app:section:screen.",
+      "examples": [
+        "alpha_trade:order_entry:equities"
+      ]
+    },
+    "surface_kind": {
+      "type": "string",
+      "enum": [
+        "screen",
+        "modal",
+        "panel",
+        "widget",
+        "drawer"
+      ],
+      "description": "Kind of surface this AOM document represents."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "generator": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "purpose": {
+      "type": "object",
+      "required": [
+        "primary_goal",
+        "user_roles"
+      ],
+      "properties": {
+        "primary_goal": {
+          "type": "string"
+        },
+        "user_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "context": {
+      "type": "object",
+      "required": [
+        "app_name",
+        "locale"
+      ],
+      "properties": {
+        "app_name": {
+          "type": "string"
+        },
+        "tenant_id": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "tasks": {
+      "type": "array",
+      "description": "Explicit tasks this AOM surface supports.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "default_action_id": {
+            "type": "string"
+          },
+          "input_entities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "output_entities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entry_actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "success_conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "failure_conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "entities": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "schema"
+        ],
+        "properties": {
+          "schema": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "string",
+                    "number",
+                    "boolean",
+                    "enum",
+                    "array",
+                    "object"
+                  ]
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "required_if": {
+                  "type": "object"
+                },
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "validation": {
+                  "type": "object",
+                  "properties": {
+                    "pattern": {
+                      "type": "string"
+                    },
+                    "min_length": {
+                      "type": "number"
+                    },
+                    "max_length": {
+                      "type": "number"
+                    },
+                    "custom_rule": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "current": {
+            "type": [
+              "object",
+              "array",
+              "string",
+              "number",
+              "boolean",
+              "null"
+            ]
+          },
+          "schema_org_type": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "category"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 5
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "GET",
+              "POST",
+              "PUT",
+              "PATCH",
+              "DELETE"
+            ]
+          },
+          "a2h_policy": {
+            "type": "object",
+            "description": "Defines the Agent-to-Human (A2H) communication rules for this action. Overrides surface a2h when set.",
+            "properties": {
+              "requires_authorization": {
+                "type": "boolean",
+                "description": "If true, the agent MUST escalate via A2H AUTHORIZE intent before execution.",
+                "default": false
+              },
+              "confidence_threshold": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "description": "Hand over to human when agent confidence is strictly below this value. Overrides surface a2h.confidence_threshold for this action."
+              },
+              "intent_type": {
+                "type": "string",
+                "enum": ["INFORM", "COLLECT", "AUTHORIZE", "ESCALATE", "RESULT"],
+                "description": "A2H intent type when this action requires handover (e.g. AUTHORIZE when requires_authorization is true)."
+              },
+              "escalation_channel": {
+                "type": "string",
+                "enum": [
+                  "in_app",
+                  "sms",
+                  "email",
+                  "push",
+                  "voice"
+                ],
+                "description": "Channel for A2H when this action escalates."
+              }
+            },
+            "additionalProperties": false
+          },
+          "input_entities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "output_entities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "binds_to": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "ref": {
+                "type": "string"
+              },
+              "optional": {
+                "type": "boolean",
+                "default": false
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "state": {
+      "type": "object",
+      "properties": {
+        "session": {
+          "type": "object",
+          "properties": {
+            "authenticated": {
+              "type": "boolean",
+              "default": false
+            },
+            "user_id": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": true
+        },
+        "workflow": {
+          "type": "object",
+          "description": "Cross-surface flow context. When present, links this surface to a multi-step flow so outputs (meta.workflow.next_step_id) and test_cases are trackable across steps. Single-screen surfaces (e.g. login) may leave flow_id/step_id null.",
+          "properties": {
+            "flow_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Stable id for the entire flow (e.g. 'ecom-checkout'). Same value across all surfaces in the flow; null for single-screen flows."
+            },
+            "task_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Current task id within the flow; may match tasks[].id or denote the step's purpose."
+            },
+            "step_id": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Step identifier for ordering and matching output (e.g. 'step01', 'step02'). Used with flow_id to pass output_entities to the next surface; often aligns with file naming (step01_product.aom.json)."
+            }
+          },
+          "additionalProperties": true
+        },
+        "flags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "navigation": {
+      "type": "object",
+      "properties": {
+        "breadcrumbs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "label": {
+                "type": "string"
+              },
+              "surface_id": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "neighbors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "surface_id": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "a2h": {
+      "type": "object",
+      "description": "Surface-level Agent-to-Human (A2H) policy. When agent confidence is below confidence_threshold, the agent MUST escalate (output meta.a2h_intent, action_id 'none'). Overridable by action a2h_policy and per test case.",
+      "properties": {
+        "confidence_threshold": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Hand over to human when agent confidence is strictly below this value (e.g. 0.9)."
+        },
+        "default_intent_type": {
+          "type": "string",
+          "enum": ["INFORM", "COLLECT", "AUTHORIZE", "ESCALATE", "RESULT"],
+          "description": "Default A2H intent type when escalating (e.g. ESCALATE for low confidence)."
+        },
+        "escalation_channel": {
+          "type": "string",
+          "enum": ["in_app", "sms", "email", "push", "voice"],
+          "description": "Default channel for A2H escalation on this surface."
+        }
+      },
+      "additionalProperties": false
+    },
+    "signals": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notifications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "test_cases": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "errors": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "expected": {
+                "type": "object",
+                "description": "For success test cases: key-value pairs to include in the generated output (e.g. user_id, name). The generator uses this to build the correct result payload.",
+                "additionalProperties": true
+              },
+              "intent_type": {
+                "type": "string",
+                "enum": ["INFORM", "COLLECT", "AUTHORIZE", "ESCALATE", "RESULT"],
+                "description": "A2H intent type when this test case triggers escalation (e.g. ESCALATE for errors). Overrides surface/action default if set."
+              },
+              "escalation_channel": {
+                "type": "string",
+                "enum": ["in_app", "sms", "email", "push", "voice"],
+                "description": "Channel for A2H when this test case escalates; overrides surface/action default if set."
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

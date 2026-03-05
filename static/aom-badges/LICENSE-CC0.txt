@@ -1,0 +1,10 @@
+AOM Policy Badges – License
+
+The AOM policy badges (including “No Automation”, “AOM Ready”, and “AOM Open” icons)
+are dedicated to the public domain under the Creative Commons CC0 1.0 Universal
+Public Domain Dedication.
+
+You can copy, modify, distribute, and use the badges, even for commercial purposes,
+without asking permission or providing attribution.
+
+Full legal text: https://creativecommons.org/publicdomain/zero/1.0/

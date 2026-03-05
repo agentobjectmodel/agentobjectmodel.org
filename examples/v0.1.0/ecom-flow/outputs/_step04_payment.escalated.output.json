@@ -1,0 +1,17 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "none",
+    "params": {}
+  },
+  "meta": {
+    "done": false,
+    "confidence": 0.8,
+    "a2h_intent": {
+      "type": "AUTHORIZE",
+      "message": "Confidence below threshold. Please complete or verify the action.",
+      "escalation_channel": "in_app"
+    }
+  },
+  "thought": "Confidence below threshold; handing over to human."
+}

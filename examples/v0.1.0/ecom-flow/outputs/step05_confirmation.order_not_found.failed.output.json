@@ -1,0 +1,20 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "none",
+    "params": {}
+  },
+  "meta": {
+    "done": false,
+    "confidence": 0.8,
+    "error": {
+      "message": "Order not found."
+    },
+    "a2h_intent": {
+      "type": "ESCALATE",
+      "message": "Order not found.",
+      "escalation_channel": "in_app"
+    }
+  },
+  "thought": "Confidence below threshold; handing over to human."
+}

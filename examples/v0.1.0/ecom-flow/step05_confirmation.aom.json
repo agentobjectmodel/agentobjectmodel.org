@@ -1,0 +1,87 @@
+{
+  "automation_policy": "open",
+  "aom_version": "0.1.0",
+  "surface_id": "app:shop:confirmation",
+  "surface_kind": "screen",
+  "purpose": {
+    "primary_goal": "View order confirmation.",
+    "user_roles": ["customer"]
+  },
+  "context": {
+    "app_name": "aom.tools",
+    "locale": "en-US"
+  },
+  "tasks": [
+    {
+      "id": "view_confirmation",
+      "label": "View confirmation",
+      "description": "See order details and next steps.",
+      "default_action_id": "continue_shopping",
+      "input_entities": ["OrderConfirmation"],
+      "output_entities": [],
+      "success_conditions": ["Order displayed"],
+      "failure_conditions": ["signals.errors length > 0"]
+    }
+  ],
+  "entities": {
+    "OrderConfirmation": {
+      "schema": {
+        "order_id": { "type": "string", "required": true, "description": "Order id" },
+        "status": { "type": "string", "required": true, "description": "Order status" },
+        "total": { "type": "number", "required": true, "description": "Order total" }
+      },
+      "current": { "order_id": "", "status": "confirmed", "total": 0 }
+    }
+  },
+  "actions": [
+    {
+      "id": "view_order",
+      "label": "View order",
+      "category": "navigation",
+      "description": "Open order details.",
+      "priority": 6,
+      "method": "GET"
+    },
+    {
+      "id": "continue_shopping",
+      "label": "Continue shopping",
+      "category": "navigation",
+      "description": "Return to product listing.",
+      "priority": 7,
+      "method": "GET"
+    }
+  ],
+  "state": {
+    "session": { "authenticated": true, "user_id": "user1234" },
+    "workflow": {
+      "flow_id": "ecom-checkout",
+      "task_id": "view_confirmation",
+      "step_id": "step05"
+    }
+  },
+  "navigation": {
+    "breadcrumbs": [
+      { "label": "Payment", "surface_id": "app:shop:checkout_payment" },
+      { "label": "Confirmation", "surface_id": "app:shop:confirmation" }
+    ],
+    "neighbors": [
+      { "surface_id": "app:shop:product", "label": "Continue shopping" },
+      { "surface_id": "app:shop:home", "label": "Home" }
+    ]
+  },
+  "a2h": {
+    "confidence_threshold": 0.9,
+    "default_intent_type": "ESCALATE",
+    "escalation_channel": "in_app"
+  },
+  "signals": {
+    "errors": [],
+    "warnings": [],
+    "notifications": [],
+    "test_cases": [
+      { "name": "success", "errors": [], "expected": { "order_id": "ord_001", "status": "confirmed", "total": 49.98 } },
+      { "name": "order_not_found", "errors": ["Order not found."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "load_error", "errors": ["Unable to load order details. Please try again."], "intent_type": "ESCALATE", "escalation_channel": "in_app" }
+    ]
+  }
+}

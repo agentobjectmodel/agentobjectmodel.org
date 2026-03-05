@@ -1,0 +1,11 @@
+{
+  "name": "aom-demo-agent",
+  "version": "0.1.0",
+  "description": "Demo agent: consumes login AOM surface, returns success or failed output.",
+  "type": "module",
+  "scripts": {
+    "start": "node demo_agent.js",
+    "test": "node run_tests.js"
+  },
+  "engines": { "node": ">=18" }
+}

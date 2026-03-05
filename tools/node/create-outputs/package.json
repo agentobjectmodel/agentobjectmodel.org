@@ -1,0 +1,8 @@
+{
+  "name": "aom-create-outputs",
+  "version": "0.1.0",
+  "description": "Generate golden AOM output files for testing.",
+  "type": "module",
+  "scripts": { "create-outputs": "node create_outputs.js" },
+  "engines": { "node": ">=18" }
+}

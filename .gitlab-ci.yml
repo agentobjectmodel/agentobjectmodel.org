@@ -1,0 +1,33 @@
+# .gitlab-ci.yml – add this to examples symlink
+pages:
+  stage: deploy
+  script:
+    # Copy everything to public/
+    - mkdir -p public
+    - cp -r * public/
+    
+    # spec/latest symlink
+    - mkdir -p public/spec/latest
+    - ln -s ../../v0.1.0 public/spec/latest
+    
+    # examples/latest symlink  
+    - mkdir -p public/examples/latest
+    - ln -s ../../v0.1.0 public/examples/latest
+    
+    # .well-known policy for your site
+    - mkdir -p public/.well-known
+    - |
+      cat > public/.well-known/aom-policy.json << EOF
+      {
+        "automation_policy": "open",
+        "aom_version": "0.1.0",
+        "_comment": "agentobjectmodel.org is AOM Open"
+      }
+      EOF
+    
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+    - master

@@ -1,0 +1,122 @@
+{
+    "automation_policy": "allowed",
+    "aom_version": "0.1.0",
+    "surface_id": "app:auth:login",
+    "surface_kind": "screen",
+    "purpose": {
+      "primary_goal": "Authenticate the user and establish a session.",
+      "user_roles": ["guest", "anonymous"]
+    },
+    "context": {
+      "app_name": "aom.tools",
+      "locale": "en-US"
+    },
+    "tasks": [
+      {
+        "id": "login",
+        "label": "Sign in",
+        "description": "Submit credentials to authenticate.",
+        "default_action_id": "submit_login",
+        "input_entities": ["LoginCredentials"],
+        "success_conditions": ["state.session.authenticated === true"],
+        "failure_conditions": ["signals.errors length > 0", "Invalid credentials", "Account locked"]
+      }
+    ],
+    "entities": {
+      "LoginCredentials": {
+        "schema": {
+          "username": {
+            "type": "string",
+            "required": true,
+            "description": "Email or username",
+            "validation": {
+              "min_length": 1,
+              "max_length": 255
+            }
+          },
+          "password": {
+            "type": "string",
+            "required": true,
+            "description": "Password",
+            "validation": {
+              "min_length": 1,
+              "max_length": 128
+            }
+          }
+        },
+        "current": {
+          "username": "",
+          "password": ""
+        }
+      }
+    },
+    "actions": [
+      {
+        "id": "submit_login",
+        "label": "Sign in",
+        "category": "mutation",
+        "description": "Submit login form with username and password.",
+        "priority": 8,
+        "method": "POST",
+        "input_entities": ["LoginCredentials"],
+        "output_entities": [],
+        "effects": ["state.session.authenticated = true", "state.session.user_id set"]
+      }
+    ],
+    "state": {
+      "session": {
+        "authenticated": false,
+        "user_id": null
+      },
+      "workflow": {
+        "flow_id": null,
+        "task_id": null,
+        "step_id": null
+      }
+    },
+    "navigation": {
+      "breadcrumbs": [],
+      "neighbors": [
+        { "surface_id": "app:auth:register", "label": "Create account" }
+      ]
+    },
+    "a2h": {
+      "confidence_threshold": 0.9,
+      "default_intent_type": "ESCALATE",
+      "escalation_channel": "in_app"
+    },
+    "signals": {
+        "errors": [],
+        "warnings": [],
+        "notifications": [],
+        "test_cases": [
+            {
+            "name": "success",
+            "errors": [],
+            "expected": {
+                "user_id": "user1234",
+                "name": "Test User"
+            }
+            },
+            { "name": "empty_username", "errors": ["Username is required."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "empty_password", "errors": ["Password is required."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "empty_username_and_password", "errors": ["Username is required.", "Password is required."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "invalid_email_format", "errors": ["Please enter a valid email address."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "invalid_credentials", "errors": ["Invalid username or password."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "account_locked", "errors": ["Account is locked due to too many failed attempts. Try again in 15 minutes or reset your password."], "intent_type": "ESCALATE", "escalation_channel": "email" },
+            { "name": "account_disabled", "errors": ["This account has been disabled. Contact support."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "account_pending_verification", "errors": ["Please verify your email before signing in."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "password_expired", "errors": ["Your password has expired. You will be redirected to change it."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "rate_limited", "errors": ["Too many login attempts. Please try again later."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "session_expired", "errors": ["Your session has expired. Please sign in again."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "network_error", "errors": ["Unable to connect. Please check your connection and try again."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "server_error", "errors": ["Something went wrong on our end. Please try again later."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "captcha_required", "errors": ["Please complete the security verification."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "maintenance_mode", "errors": ["Login is temporarily unavailable for maintenance."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "username_too_short", "errors": ["Username must be at least 3 characters."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "password_too_short", "errors": ["Password must be at least 8 characters."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "csrf_invalid", "errors": ["Security validation failed. Please refresh and try again."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+            { "name": "ip_blocked", "errors": ["Access from your location is not permitted."], "intent_type": "ESCALATE", "escalation_channel": "in_app" }
+        ]
+    }
+  }

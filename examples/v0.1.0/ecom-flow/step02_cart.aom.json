@@ -1,0 +1,98 @@
+{
+  "automation_policy": "open",
+  "aom_version": "0.1.0",
+  "surface_id": "app:shop:cart",
+  "surface_kind": "screen",
+  "purpose": {
+    "primary_goal": "Review cart and proceed to checkout.",
+    "user_roles": ["guest", "customer"]
+  },
+  "context": {
+    "app_name": "aom.tools",
+    "locale": "en-US"
+  },
+  "tasks": [
+    {
+      "id": "proceed_to_checkout",
+      "label": "Proceed to checkout",
+      "description": "Go to shipping step.",
+      "default_action_id": "proceed_to_checkout",
+      "input_entities": ["Cart"],
+      "output_entities": ["CartSummary"],
+      "success_conditions": ["navigate to step03"],
+      "failure_conditions": ["signals.errors length > 0", "Cart empty"]
+    }
+  ],
+  "entities": {
+    "Cart": {
+      "schema": {
+        "line_items": { "type": "array", "required": true, "description": "Cart line items" },
+        "subtotal": { "type": "number", "required": true, "description": "Subtotal amount" }
+      },
+      "current": { "line_items": [], "subtotal": 0 }
+    }
+  },
+  "actions": [
+    {
+      "id": "proceed_to_checkout",
+      "label": "Proceed to checkout",
+      "category": "mutation",
+      "description": "Continue to shipping step.",
+      "priority": 8,
+      "method": "POST",
+      "input_entities": ["Cart"],
+      "output_entities": ["CartSummary"],
+      "effects": ["navigate to step03"]
+    },
+    {
+      "id": "update_quantity",
+      "label": "Update quantity",
+      "category": "mutation",
+      "description": "Change quantity for a line item.",
+      "priority": 5,
+      "method": "PATCH"
+    },
+    {
+      "id": "remove_item",
+      "label": "Remove item",
+      "category": "mutation",
+      "description": "Remove line item from cart.",
+      "priority": 5,
+      "method": "DELETE"
+    }
+  ],
+  "state": {
+    "session": { "authenticated": true, "user_id": "user1234" },
+    "workflow": {
+      "flow_id": "ecom-checkout",
+      "task_id": "proceed_to_checkout",
+      "step_id": "step02"
+    }
+  },
+  "navigation": {
+    "breadcrumbs": [
+      { "label": "Home", "surface_id": "app:shop:home" },
+      { "label": "Cart", "surface_id": "app:shop:cart" }
+    ],
+    "neighbors": [
+      { "surface_id": "app:shop:product", "label": "Continue shopping" },
+      { "surface_id": "app:shop:checkout_shipping", "label": "Checkout" }
+    ]
+  },
+  "a2h": {
+    "confidence_threshold": 0.9,
+    "default_intent_type": "ESCALATE",
+    "escalation_channel": "in_app"
+  },
+  "signals": {
+    "errors": [],
+    "warnings": [],
+    "notifications": [],
+    "test_cases": [
+      { "name": "success", "errors": [], "expected": { "cart_id": "cart_001", "item_count": 2, "subtotal": 49.98, "next_step_id": "step03" } },
+      { "name": "empty_cart", "errors": ["Your cart is empty. Add items before checkout."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "item_unavailable", "errors": ["An item in your cart is no longer available."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "cart_expired", "errors": ["Your cart has expired. Please add items again."], "intent_type": "ESCALATE", "escalation_channel": "in_app" }
+    ]
+  }
+}

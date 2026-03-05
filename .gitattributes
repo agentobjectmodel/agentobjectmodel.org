@@ -1,0 +1,29 @@
+# Line endings: normalize and prefer LF for text
+* text=auto eol=lf
+
+# Explicit text files (ensure LF)
+*.md text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binaries (no merge, no diff)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.pdf binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+
+# SVG: treat as text so patches work (optional; use binary if you prefer)
+*.svg text eol=lf

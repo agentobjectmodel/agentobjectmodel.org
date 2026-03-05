@@ -1,0 +1,94 @@
+{
+  "automation_policy": "open",
+  "aom_version": "0.1.0",
+  "surface_id": "app:shop:checkout_shipping",
+  "surface_kind": "screen",
+  "purpose": {
+    "primary_goal": "Enter or confirm shipping address.",
+    "user_roles": ["customer"]
+  },
+  "context": {
+    "app_name": "aom.tools",
+    "locale": "en-US"
+  },
+  "tasks": [
+    {
+      "id": "save_shipping",
+      "label": "Save shipping address",
+      "description": "Submit shipping details and continue to payment.",
+      "default_action_id": "continue_to_payment",
+      "input_entities": ["ShippingAddress"],
+      "output_entities": ["ShippingConfirmation"],
+      "success_conditions": ["Address saved", "navigate to step04"],
+      "failure_conditions": ["signals.errors length > 0", "Invalid address"]
+    }
+  ],
+  "entities": {
+    "ShippingAddress": {
+      "schema": {
+        "full_name": { "type": "string", "required": true, "description": "Full name" },
+        "line1": { "type": "string", "required": true, "description": "Address line 1" },
+        "city": { "type": "string", "required": true, "description": "City" },
+        "postal_code": { "type": "string", "required": true, "description": "Postal code" },
+        "country": { "type": "string", "required": true, "description": "Country code" }
+      },
+      "current": { "full_name": "", "line1": "", "city": "", "postal_code": "", "country": "" }
+    }
+  },
+  "actions": [
+    {
+      "id": "continue_to_payment",
+      "label": "Continue to payment",
+      "category": "mutation",
+      "description": "Save shipping and go to payment step.",
+      "priority": 8,
+      "method": "POST",
+      "input_entities": ["ShippingAddress"],
+      "output_entities": ["ShippingConfirmation"],
+      "effects": ["Address saved", "navigate to step04"]
+    },
+    {
+      "id": "back_to_cart",
+      "label": "Back to cart",
+      "category": "navigation",
+      "description": "Return to cart.",
+      "priority": 3,
+      "method": "GET"
+    }
+  ],
+  "state": {
+    "session": { "authenticated": true, "user_id": "user1234" },
+    "workflow": {
+      "flow_id": "ecom-checkout",
+      "task_id": "save_shipping",
+      "step_id": "step03"
+    }
+  },
+  "navigation": {
+    "breadcrumbs": [
+      { "label": "Cart", "surface_id": "app:shop:cart" },
+      { "label": "Shipping", "surface_id": "app:shop:checkout_shipping" }
+    ],
+    "neighbors": [
+      { "surface_id": "app:shop:cart", "label": "Back" },
+      { "surface_id": "app:shop:checkout_payment", "label": "Payment" }
+    ]
+  },
+  "a2h": {
+    "confidence_threshold": 0.9,
+    "default_intent_type": "ESCALATE",
+    "escalation_channel": "in_app"
+  },
+  "signals": {
+    "errors": [],
+    "warnings": [],
+    "notifications": [],
+    "test_cases": [
+      { "name": "success", "errors": [], "expected": { "address_id": "addr_001", "shipping_method": "standard", "next_step_id": "step04" } },
+      { "name": "invalid_address", "errors": ["Please enter a valid address."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "missing_required_fields", "errors": ["Please fill in all required fields."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "unsupported_region", "errors": ["We do not ship to this region."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "invalid_postal_code", "errors": ["Please enter a valid postal code for this country."], "intent_type": "ESCALATE", "escalation_channel": "in_app" }
+    ]
+  }
+}

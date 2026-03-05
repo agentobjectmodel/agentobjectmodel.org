@@ -1,0 +1,20 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "none",
+    "params": {}
+  },
+  "meta": {
+    "done": false,
+    "confidence": 0.8,
+    "error": {
+      "message": "Access from your location is not permitted."
+    },
+    "a2h_intent": {
+      "type": "ESCALATE",
+      "message": "Access from your location is not permitted.",
+      "escalation_channel": "in_app"
+    }
+  },
+  "thought": "Confidence below threshold; handing over to human."
+}

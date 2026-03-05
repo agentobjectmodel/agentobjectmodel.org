@@ -1,0 +1,18 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "submit_login",
+    "params": {},
+    "priority": 5
+  },
+  "meta": {
+    "done": true,
+    "confidence": 0.9500000000000001
+  },
+  "thought": "Proceeding with default task action.",
+  "result": {
+    "ok": true,
+    "user_id": "user1234",
+    "name": "Test User"
+  }
+}

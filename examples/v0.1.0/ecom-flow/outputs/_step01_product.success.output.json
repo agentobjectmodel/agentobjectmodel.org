@@ -1,0 +1,20 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "add_to_cart",
+    "params": {},
+    "priority": 5
+  },
+  "meta": {
+    "done": true,
+    "confidence": 0.9500000000000001
+  },
+  "thought": "Proceeding with default task action.",
+  "result": {
+    "ok": true,
+    "cart_item_id": "item_001",
+    "product_id": "prod_001",
+    "quantity": 1,
+    "next_step_id": "step02"
+  }
+}

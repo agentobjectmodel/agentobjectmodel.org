@@ -1,0 +1,30 @@
+# Node (any node_modules)
+node_modules/
+
+# Python
+**/__pycache__/
+**/.pytest_cache/
+.venv/
+venv/
+*.pyc
+.mypy_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+.env
+.env.local
+.env.*.local
+
+# Cursor project metadata
+.cursor/
+

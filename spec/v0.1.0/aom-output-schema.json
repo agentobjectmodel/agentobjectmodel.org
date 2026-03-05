@@ -1,0 +1,153 @@
+{
+  "$id": "https://agentobjectmodel.org/schemas/aom-output.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Agent Object Model (AOM)™ Output Schema",
+  "description": "Standardized output envelope for AI agents operating on AOM™ surfaces. Supports confidence scoring, workflow tracking, and native A2H (Agent-to-Human) communication intents.",
+  "version": "0.1.0",
+  "type": "object",
+  "required": [
+    "mode",
+    "action",
+    "meta"
+  ],
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "single",
+        "flow"
+      ],
+      "description": "'single' = one-shot result. 'flow' = step in multi-step agent loop."
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "Logical name or identifier of the agent producing this output."
+    },
+    "step_id": {
+      "type": "string",
+      "description": "Monotonic step identifier within a flow."
+    },
+    "thought": {
+      "type": "string",
+      "description": "Agent's natural-language reasoning for this step. For debugging and transparency, not machine consumption."
+    },
+    "action": {
+      "type": "object",
+      "description": "Action the agent requests the runtime to execute. action_id MUST match an AOM actions[].id.",
+      "required": [
+        "action_id"
+      ],
+      "properties": {
+        "action_id": {
+          "type": "string",
+          "description": "Identifier of AOM action to execute. Use 'none' if no action is required or if escalating to a human."
+        },
+        "priority": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10,
+          "default": 5
+        },
+        "params": {
+          "type": "object",
+          "description": "Parameters for the action. Must be empty if action_id is 'none'.",
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "result": {
+      "description": "Final result payload for the task. Present when meta.done=true or mode='single'.",
+      "type": [
+        "object",
+        "array",
+        "string",
+        "number",
+        "boolean",
+        "null"
+      ]
+    },
+    "meta": {
+      "type": "object",
+      "description": "Control flags, production intelligence, and human escalation intents for the runtime.",
+      "required": [
+        "done",
+        "confidence"
+      ],
+      "properties": {
+        "done": {
+          "type": "boolean",
+          "default": false
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Agent's self-reported confidence in this step's action/result (0.0 to 1.0)."
+        },
+        "a2h_intent": {
+          "type": "object",
+          "description": "Agent-to-Human (A2H) communication intent. Used when the agent pauses execution to interact with a human.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["INFORM", "COLLECT", "AUTHORIZE", "ESCALATE", "RESULT"],
+              "description": "A2H intent type (from surface a2h, action a2h_policy, or test case)."
+            },
+            "message": {
+              "type": "string"
+            },
+            "escalation_channel": {
+              "type": "string",
+              "enum": ["in_app", "sms", "email", "push", "voice"],
+              "description": "Channel on which the agent escalated to human (from surface a2h or action a2h_policy or test case)."
+            },
+            "schema": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "type",
+            "message"
+          ],
+          "additionalProperties": false
+        },
+        "error": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "message"
+          ],
+          "additionalProperties": false
+        },
+        "workflow": {
+          "type": "object",
+          "description": "Flow handoff: when meta.done is true in a multi-step flow, runtime uses flow_id + next_step_id to load the next surface (e.g. step02_cart.aom.json).",
+          "properties": {
+            "flow_id": {
+              "type": "string",
+              "description": "Must match state.workflow.flow_id of the current and next surface in the flow."
+            },
+            "next_step_id": {
+              "type": "string",
+              "description": "Step id of the next surface (e.g. 'step02'); used to select the next .aom.json in the flow."
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

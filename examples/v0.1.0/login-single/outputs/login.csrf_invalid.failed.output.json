@@ -1,0 +1,20 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "none",
+    "params": {}
+  },
+  "meta": {
+    "done": false,
+    "confidence": 0.8,
+    "error": {
+      "message": "Security validation failed. Please refresh and try again."
+    },
+    "a2h_intent": {
+      "type": "ESCALATE",
+      "message": "Security validation failed. Please refresh and try again.",
+      "escalation_channel": "in_app"
+    }
+  },
+  "thought": "Confidence below threshold; handing over to human."
+}

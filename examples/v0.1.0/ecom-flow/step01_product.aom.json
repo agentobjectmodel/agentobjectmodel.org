@@ -1,0 +1,87 @@
+{
+  "automation_policy": "open",
+  "aom_version": "0.1.0",
+  "surface_id": "app:shop:product",
+  "surface_kind": "screen",
+  "purpose": {
+    "primary_goal": "View product and add to cart.",
+    "user_roles": ["guest", "customer"]
+  },
+  "context": {
+    "app_name": "aom.tools",
+    "locale": "en-US"
+  },
+  "tasks": [
+    {
+      "id": "add_to_cart",
+      "label": "Add to cart",
+      "description": "Add product to cart with chosen quantity.",
+      "default_action_id": "add_to_cart",
+      "input_entities": ["ProductSelection"],
+      "output_entities": ["CartItem"],
+      "success_conditions": ["CartItem added", "navigate to step02"],
+      "failure_conditions": ["signals.errors length > 0", "Out of stock", "Invalid quantity"]
+    }
+  ],
+  "entities": {
+    "ProductSelection": {
+      "schema": {
+        "product_id": { "type": "string", "required": true, "description": "Product identifier" },
+        "quantity": { "type": "number", "required": true, "description": "Quantity to add (1-99)", "validation": { "custom_rule": "quantity between 1 and 99" } }
+      },
+      "current": { "product_id": "", "quantity": 1 }
+    }
+  },
+  "actions": [
+    {
+      "id": "add_to_cart",
+      "label": "Add to cart",
+      "category": "mutation",
+      "description": "Add selected product and quantity to cart.",
+      "priority": 8,
+      "method": "POST",
+      "input_entities": ["ProductSelection"],
+      "output_entities": ["CartItem"],
+      "effects": ["Cart updated", "navigate to step02"]
+    },
+    {
+      "id": "view_cart",
+      "label": "View cart",
+      "category": "navigation",
+      "description": "Go to cart page.",
+      "priority": 5,
+      "method": "GET"
+    }
+  ],
+  "state": {
+    "session": { "authenticated": true, "user_id": "user1234" },
+    "workflow": {
+      "flow_id": "ecom-checkout",
+      "task_id": "add_to_cart",
+      "step_id": "step01"
+    }
+  },
+  "navigation": {
+    "breadcrumbs": [{ "label": "Home", "surface_id": "app:shop:home" }],
+    "neighbors": [
+      { "surface_id": "app:shop:cart", "label": "Cart" }
+    ]
+  },
+  "a2h": {
+    "confidence_threshold": 0.9,
+    "default_intent_type": "ESCALATE",
+    "escalation_channel": "in_app"
+  },
+  "signals": {
+    "errors": [],
+    "warnings": [],
+    "notifications": [],
+    "test_cases": [
+      { "name": "success", "errors": [], "expected": { "cart_item_id": "item_001", "product_id": "prod_001", "quantity": 1, "next_step_id": "step02" } },
+      { "name": "out_of_stock", "errors": ["This item is currently out of stock."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "invalid_quantity", "errors": ["Please enter a quantity between 1 and 99."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "max_quantity_exceeded", "errors": ["Maximum quantity per order exceeded."], "intent_type": "ESCALATE", "escalation_channel": "in_app" },
+      { "name": "product_not_found", "errors": ["Product not found or no longer available."], "intent_type": "ESCALATE", "escalation_channel": "in_app" }
+    ]
+  }
+}
