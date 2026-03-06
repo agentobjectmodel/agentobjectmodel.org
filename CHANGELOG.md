@@ -3,7 +3,7 @@
 ### v0.1.0 (MVP)
 
 **Status:** Current, unsigned payloads only.  
-**Spec:** [`https://agentobjectmodel.org/spec/v0.1.0/`](https://agentobjectmodel.org/spec/v0.1.0/)
+**Spec:** [`https://www.agentobjectmodel.org/spec/v0.1.0/`](https://www.agentobjectmodel.org/spec/v0.1.0/)
 
 - **Core spec**
   - Defined the Agent Object Model™ v0.1.0: surfaces, actions, navigation, and automation policies (`allowed`, `open`, `forbidden`).
@@ -45,5 +45,5 @@
   - Reference plugins (WordPress, Next.js, Nuxt 3, Gatsby, static HTML, Shopify Liquid) and the AOM Surface Explorer browser extension are distributed from [aom.tools](https://aom.tools). They target v0.1.0 (well-known policy, per-page JSON-LD, AOM badges). See the Community and Support section of the root README for direct download links on aom.tools.
 
 - **Docs**
-  - This repo is the canonical source for the spec and reference tooling (agentobjectmodel.org). Secure/signed payloads and verification are out of scope here.
+  - This repo is the canonical source for the spec and reference tooling (https://www.agentobjectmodel.org). Secure/signed payloads and verification are out of scope here.
 

@@ -49,7 +49,7 @@ function main() {
         console.error("Missing required flag: --file");
         process.exit(1);
       }
-      process.exit(run("node", ["Tools/node/validate/validate_input.js", file]));
+      process.exit(run("node", ["tools/node/validate/validate_input.js", file]));
     }
 
     if (subcommand === "output") {
@@ -58,7 +58,7 @@ function main() {
         console.error("Missing required flag: --file");
         process.exit(1);
       }
-      process.exit(run("node", ["Tools/node/validate/validate_output.js", file]));
+      process.exit(run("node", ["tools/node/validate/validate_output.js", file]));
     }
 
     if (subcommand === "site") {
@@ -67,18 +67,18 @@ function main() {
         console.error("Missing required flag: --file");
         process.exit(1);
       }
-      process.exit(run("node", ["Tools/node/validate/validate_site.js", file]));
+      process.exit(run("node", ["tools/node/validate/validate_site.js", file]));
     }
 
     if (subcommand === "all") {
       const dir = getFlag(rest, "--examples-dir", "examples/v0.1.0");
-      process.exit(run("node", ["Tools/node/validate/validate_all.js", dir]));
+      process.exit(run("node", ["tools/node/validate/validate_all.js", dir]));
     }
   }
 
   if (command === "create-outputs") {
     // Current implementation scans examples/ automatically.
-    process.exit(run("node", ["Tools/node/create-outputs/create_outputs.js"]));
+    process.exit(run("node", ["tools/node/create-outputs/create_outputs.js"]));
   }
 
   if (command === "demo") {

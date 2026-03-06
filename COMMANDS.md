@@ -45,13 +45,13 @@ The sections below list the underlying script-level commands for reference and a
 - **Python validators:**
 
   ```bash
-  python -m pip install -r Tools/python/validate/requirements.txt
+  python -m pip install -r tools/python/validate/requirements.txt
   ```
 
 - **Node validators:**
 
   ```bash
-  cd Tools/node/validate
+  cd tools/node/validate
   npm install
   cd ../../..
   ```
@@ -63,25 +63,25 @@ The sections below list the underlying script-level commands for reference and a
 - **Single surface (Python):**
 
   ```bash
-  python Tools/python/validate/validate_input.py examples/v0.1.0/login-single/login.aom.json
+  python tools/python/validate/validate_input.py examples/v0.1.0/login-single/login.aom.json
   ```
 
 - **Single surface (Node):**
 
   ```bash
-  node Tools/node/validate/validate_input.js examples/v0.1.0/login-single/login.aom.json
+  node tools/node/validate/validate_input.js examples/v0.1.0/login-single/login.aom.json
   ```
 
 - **All examples (Python):**
 
   ```bash
-  python Tools/python/validate/validate_all.py v0.1.0
+  python tools/python/validate/validate_all.py v0.1.0
   ```
 
 - **All examples (Node):**
 
   ```bash
-  node Tools/node/validate/validate_all.js v0.1.0
+  node tools/node/validate/validate_all.js v0.1.0
   ```
 
 ---
@@ -91,13 +91,13 @@ The sections below list the underlying script-level commands for reference and a
 - **Single output (Python):**
 
   ```bash
-  python Tools/python/validate/validate_output.py examples/v0.1.0/login-single/outputs/_login.success.output.json
+  python tools/python/validate/validate_output.py examples/v0.1.0/login-single/outputs/_login.success.output.json
   ```
 
 - **Single output (Node):**
 
   ```bash
-  node Tools/node/validate/validate_output.js examples/v0.1.0/login-single/outputs/_login.success.output.json
+  node tools/node/validate/validate_output.js examples/v0.1.0/login-single/outputs/_login.success.output.json
   ```
 
 - **All outputs (Python/Node):**
@@ -105,24 +105,24 @@ The sections below list the underlying script-level commands for reference and a
   Use the same `validate_all` commands as for inputs (they cover both inputs and outputs):
 
   ```bash
-  python Tools/python/validate/validate_all.py v0.1.0
-  node Tools/node/validate/validate_all.js v0.1.0
+  python tools/python/validate/validate_all.py v0.1.0
+  node tools/node/validate/validate_all.js v0.1.0
   ```
 
 ---
 
 ### 5. Validate site-level policy (`site-policy-schema.json`)
 
-- **Python (Tools validator):**
+- **Python (tools validator):**
 
   ```bash
-  python Tools/python/validate/validate_site.py .well-known/aom-policy.open.site.json
+  python tools/python/validate/validate_site.py .well-known/aom-policy.open.site.json
   ```
 
-- **Node (Tools validator):**
+- **Node (tools validator):**
 
   ```bash
-  node Tools/node/validate/validate_site.js .well-known/aom-policy.open.site.json
+  node tools/node/validate/validate_site.js .well-known/aom-policy.open.site.json
   ```
 
 - **Python (spec-local validator):**
@@ -144,17 +144,17 @@ The sections below list the underlying script-level commands for reference and a
 - **Python create-outputs:**
 
   ```bash
-  python Tools/python/create-outputs/create_outputs.py
+  python tools/python/create-outputs/create_outputs.py
   # Optional failed-only flag (if supported in future):
-  # python Tools/python/create-outputs/create_outputs.py --failed
+  # python tools/python/create-outputs/create_outputs.py --failed
   ```
 
 - **Node create-outputs:**
 
   ```bash
-  node Tools/node/create-outputs/create_outputs.js
+  node tools/node/create-outputs/create_outputs.js
   # Optional failed-only flag (if supported in future):
-  # node Tools/node/create-outputs/create_outputs.js --failed
+  # node tools/node/create-outputs/create_outputs.js --failed
   ```
 
 ---
@@ -196,12 +196,12 @@ The sections below list the underlying script-level commands for reference and a
 - **Generic Python validator:**
 
   ```bash
-  python Tools/python/validate/validate.py spec/v0.1.0/aom-input-schema.json examples/v0.1.0/login-single/login.aom.json
+  python tools/python/validate/validate.py spec/v0.1.0/aom-input-schema.json examples/v0.1.0/login-single/login.aom.json
   ```
 
 - **Generic Node validator:**
 
   ```bash
-  node Tools/node/validate/validate.js spec/v0.1.0/aom-input-schema.json examples/v0.1.0/login-single/login.aom.json
+  node tools/node/validate/validate.js spec/v0.1.0/aom-input-schema.json examples/v0.1.0/login-single/login.aom.json
   ```
 

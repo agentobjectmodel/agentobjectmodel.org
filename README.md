@@ -1,12 +1,12 @@
-# Agent Object Model (AOM)™ · Spec and Tools
+# Agent Object Model™ (AOM)™ · Spec and Tools
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue)](https://gitlab.com/agentobjectmodel/agentobjectmodel.org/-/releases) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/agentobjectmodel/agentobjectmodel.org/releases) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 > A task-centric, entity-driven JSON standard that gives AI agents a clean, automation-aware view of any web page or surface — with zero layout noise, clear tasks, and explicit policies.
 
-**Get the project:** Clone this repo or [download ZIP](https://gitlab.com/agentobjectmodel/agentobjectmodel.org/-/archive/main/agentobjectmodel.org-main.zip) — spec, schemas, examples, and validators in one package. Latest release: [v0.1.0](https://gitlab.com/agentobjectmodel/agentobjectmodel.org/-/releases).
+**Get the project:** Clone this repo or [download ZIP](https://github.com/agentobjectmodel/agentobjectmodel.org/archive/refs/heads/master.zip) — spec, schemas, examples, and validators in one package. Latest release: [v0.1.0](https://github.com/agentobjectmodel/agentobjectmodel.org/releases).
 
-Agent Object Model and AOM are trademarks; registration has been filed. See [Trademark Notice](static/TRADEMARK-NOTICE.md). This repo is the canonical source for the AOM spec and reference tooling (agentobjectmodel.org).
+Agent Object Model and AOM are trademarks; registration has been filed. See [Trademark Notice](static/TRADEMARK-NOTICE.md). This repo is the canonical source for the AOM spec and reference tooling (https://www.agentobjectmodel.org).
 
 ---
 
@@ -226,7 +226,7 @@ agentobjectmodel.org/
 │   └── well-known-policy.md
 ├── examples/
 │   └── v0.1.0/                   # login-single, ecom-flow, _forbidden-page-template, demo-agents
-├── Tools/                        # Python + Node: validate, create-outputs, testing
+├── tools/                        # Python + Node: validate, create-outputs, testing
 ├── static/                      # Badges, USAGE.md, TRADEMARK-NOTICE.md
 ├── .well-known/                 # Example site policy JSON
 ├── aom.py                        # Python CLI
@@ -265,7 +265,7 @@ In **`automation_policy: "allowed"` (READY)** mode you decide which actions the 
 **Goal:** Validators, create-outputs, or other tooling.
 
 1. Read the [schemas](spec/v0.1.0/) (`aom-input-schema.json`, `aom-output-schema.json`, `site-policy-schema.json`).
-2. Run the [Tools](Tools/README.md) (validate, create-outputs) via CLI or scripts.
+2. Run the [tools](tools/README.md) (validate, create-outputs) via CLI or scripts.
 3. Use [COMMANDS.md](COMMANDS.md) for all commands and parameters.
 
 ---
@@ -291,7 +291,7 @@ See [examples/README.md](examples/README.md) for details and validation instruct
 - **Create-outputs**: Generate golden `*.output.json` from `*.aom.json` surfaces.
 - **Demo agents**: Reference implementations in [examples/v0.1.0/demo-agents/](examples/v0.1.0/demo-agents/) (Python + Node).
 
-Quick start: run `python aom.py --help` or `node aom.mjs --help` from the repo root. Full reference: [COMMANDS.md](COMMANDS.md) and [Tools/README.md](Tools/README.md).
+Quick start: run `python aom.py --help` or `node aom.mjs --help` from the repo root. Full reference: [COMMANDS.md](COMMANDS.md) and [tools/README.md](tools/README.md).
 
 ---
 
@@ -338,7 +338,7 @@ MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in
 ## Community and Support
 
 - **Spec and standards**: [standards@agentobjectmodel.org](mailto:standards@agentobjectmodel.org)
-- **Key docs**: [spec/v0.1.0/README.md](spec/v0.1.0/README.md), [spec/well-known-policy.md](spec/well-known-policy.md), [Tools/README.md](Tools/README.md), [COMMANDS.md](COMMANDS.md), [CONTRIBUTING.md](CONTRIBUTING.md)
+- **Key docs**: [spec/v0.1.0/README.md](spec/v0.1.0/README.md), [spec/well-known-policy.md](spec/well-known-policy.md), [tools/README.md](tools/README.md), [COMMANDS.md](COMMANDS.md), [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Trademark**: [static/TRADEMARK-NOTICE.md](static/TRADEMARK-NOTICE.md)
 - **Tools and integrations** (aom.tools): plugins, browser extension, and agent kits — direct downloads:
   - **Plugins:** [WordPress](https://aom.tools/releases/aom-policy-wp.zip) · [Next.js](https://aom.tools/releases/aom-next-middleware.zip) · [Static site](https://aom.tools/releases/aom-static-site-snippets.zip) · [Nuxt](https://aom.tools/releases/aom-nuxt-middleware.zip) · [Gatsby](https://aom.tools/releases/aom-gatsby.zip) · [Shopify](https://aom.tools/releases/aom-shopify.zip)

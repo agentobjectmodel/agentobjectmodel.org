@@ -10,6 +10,6 @@ Multi-step AOM example: **product → cart → shipping → payment → confirma
 | step04 | `step04_payment.aom.json` | Payment; `place_order` has A2H policy (authorize) |
 | step05 | `step05_confirmation.aom.json` | Order confirmation |
 
-**Outputs:** Generated under each step’s `outputs/`. Use the [create-outputs](../../../Tools/testing/README.md) tools to regenerate; see the [examples overview](../../README.md).
+**Outputs:** Generated under each step’s `outputs/`. Use the [create-outputs](../../../tools/testing/README.md) tools to regenerate; see the [examples overview](../../README.md).
 
-**Validate:** From repo root, `python aom.py validate all --examples-dir examples/v0.1.0` or this folder only: `python Tools/python/validate/validate_all.py v0.1.0/ecom-flow` / `node Tools/node/validate/validate_all.js v0.1.0/ecom-flow`.
+**Validate:** From repo root, `python aom.py validate all --examples-dir examples/v0.1.0` or this folder only: `python tools/python/validate/validate_all.py v0.1.0/ecom-flow` / `node tools/node/validate/validate_all.js v0.1.0/ecom-flow`.

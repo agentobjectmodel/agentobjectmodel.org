@@ -3,7 +3,7 @@
  * Validate an AOM input surface (aom-input-schema.json).
  *
  * Usage:
- *   node Tools/node/validate/validate_input.js <aom-json-path>
+ *   node tools/node/validate/validate_input.js <aom-json-path>
  */
 
 import path from "path";
@@ -18,7 +18,7 @@ const SCHEMA = path.join(REPO_ROOT, "spec", "v0.1.0", "aom-input-schema.json");
 function main() {
   const args = process.argv.slice(2);
   if (!args[0]) {
-    console.error("Usage: node Tools/node/validate/validate_input.js <aom-json-path>");
+    console.error("Usage: node tools/node/validate/validate_input.js <aom-json-path>");
     process.exit(1);
   }
 

@@ -6,13 +6,11 @@ pages:
     - mkdir -p public
     - cp -r * public/
     
-    # spec/latest symlink
-    - mkdir -p public/spec/latest
-    - ln -s ../../v0.1.0 public/spec/latest
+    # spec/latest symlink (latest -> v0.1.0 inside spec/)
+    - ln -sfn v0.1.0 public/spec/latest
     
-    # examples/latest symlink  
-    - mkdir -p public/examples/latest
-    - ln -s ../../v0.1.0 public/examples/latest
+    # examples/latest symlink (latest -> v0.1.0 inside examples/)
+    - ln -sfn v0.1.0 public/examples/latest
     
     # .well-known policy for your site
     - mkdir -p public/.well-known
@@ -21,7 +19,7 @@ pages:
       {
         "automation_policy": "open",
         "aom_version": "0.1.0",
-        "_comment": "agentobjectmodel.org is AOM Open"
+        "_comment": "www.agentobjectmodel.org is AOM Open"
       }
       EOF
     

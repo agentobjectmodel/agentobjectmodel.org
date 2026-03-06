@@ -1,5 +1,5 @@
 {
-  "$id": "https://agentobjectmodel.org/schemas/aom-core.schema.json",
+  "$id": "https://www.agentobjectmodel.org/schemas/aom-core.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Agent Object Model (AOM)™ Core Schema",
   "description": "Core schema for representing an interactive interface as an Agent Object Model (AOM)™. Provides a task- and entity-centric JSON format for AI agents, replacing the visual DOM with semantic actions, state, and A2H policies.",

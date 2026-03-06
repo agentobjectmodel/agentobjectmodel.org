@@ -24,13 +24,13 @@ Paths: `spec/v0.1.0/`, `examples/v0.1.0/`. Full reference: [COMMANDS.md](../COMM
 Tooling is by **language** (Python or Node). Demo agents live under **examples/v0.1.0/demo-agents/**: [python](../examples/v0.1.0/demo-agents/python/README.md), [node](../examples/v0.1.0/demo-agents/node/README.md).
 
 ```
-Tools/
+tools/
   python/  validate/  create-outputs/
   node/    validate/  create-outputs/
 ```
 
-- **Python validate:** `pip install -r Tools/python/validate/requirements.txt`
-- **Node validate:** `npm install` in `Tools/node/validate/`
+- **Python validate:** `pip install -r tools/python/validate/requirements.txt`
+- **Node validate:** `npm install` in `tools/node/validate/`
 - **create-outputs:** no extra deps (Python or Node)
 
 ---
@@ -40,12 +40,12 @@ Tools/
 From repo root, if you need to call scripts directly instead of the CLI:
 
 **All examples:**  
-`python Tools/python/validate/validate_all.py`
-`node Tools/node/validate/validate_all.js`
+`python tools/python/validate/validate_all.py`
+`node tools/node/validate/validate_all.js`
 
 **Create outputs:**  
-`python Tools/python/create-outputs/create_outputs.py`
-`node Tools/node/create-outputs/create_outputs.js`
+`python tools/python/create-outputs/create_outputs.py`
+`node tools/node/create-outputs/create_outputs.js`
 
 **Demo agent:**  
 `python examples/v0.1.0/demo-agents/python/demo_agent.py --folder v0.1.0/login-single --test-case _login.success.output`

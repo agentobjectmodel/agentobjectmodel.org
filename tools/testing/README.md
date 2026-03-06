@@ -1,6 +1,6 @@
 # Testing and Validation Overview
 
-This folder provides an overview of how to **test and validate** AOM payloads in this repo. It ties together the language-specific tools in `Tools/python/` and `Tools/node/` and the versioned examples in `examples/`.
+This folder provides an overview of how to **test and validate** AOM payloads in this repo. It ties together the language-specific tools in `tools/python/` and `tools/node/` and the versioned examples in `examples/`.
 
 For AOM v0.1.0, the primary entrypoint for testing is the **`validate` commands**; there is no separate "test runner" beyond these validators and the demo agents.
 
@@ -24,16 +24,16 @@ python aom.py validate output --file examples/v0.1.0/login-single/outputs/_login
 
 Use the `validate` tools to check your AOM JSON against the schemas in `spec/v0.1.0/`:
 
-- Python: see `Tools/python/validate/README.md`
-- Node: see `Tools/node/validate/README.md`
+- Python: see `tools/python/validate/README.md`
+- Node: see `tools/node/validate/README.md`
 
 From the repo root (script-level, advanced):
 
 ```bash
 # Validate all examples
-python Tools/python/validate/validate_all.py
+python tools/python/validate/validate_all.py
 # or
-node Tools/node/validate/validate_all.js
+node tools/node/validate/validate_all.js
 ```
 
 These commands:

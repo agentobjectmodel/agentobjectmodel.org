@@ -9,7 +9,7 @@ Generates golden AOM output JSON for testing. Same behavior as [Python create-ou
 ```bash
 node aom.mjs create-outputs
 # or (script-level)
-node Tools/node/create-outputs/create_outputs.js
+node tools/node/create-outputs/create_outputs.js
 ```
 
 Optional: `--failed` is accepted for compatibility.
@@ -26,4 +26,4 @@ Optional: `--failed` is accepted for compatibility.
 
 Create a **skip marker**: same name as the output file plus `.skip` (e.g. `_login.success.output.json.skip`). The script will not overwrite that output and will include it in the summary as skipped.
 
-At the end of the run, a **summary** lists per AOM file how many outputs were created and skipped, plus totals. See [Tools/testing/README.md](../../testing/README.md) for an overview.
+At the end of the run, a **summary** lists per AOM file how many outputs were created and skipped, plus totals. See [tools/testing/README.md](../../testing/README.md) for an overview.

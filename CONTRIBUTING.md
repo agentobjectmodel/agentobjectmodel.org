@@ -10,7 +10,7 @@ This repository is the **reference implementation** of the AOM specification (sc
 
 - **Spec + schemas** under `spec/` (for example `spec/v0.1.0/`).
 - **Examples** under `examples/` (for example `examples/v0.1.0/`).
-- **Reference tools** under `Tools/`:
+- **Reference tools** under `tools/`:
   - Validators (Python + Node)
   - Output generators (`create-outputs`)
   - Demo agents for examples

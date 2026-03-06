@@ -3,7 +3,7 @@
 Validate a site-level policy JSON (site-policy-schema.json).
 
 Usage:
-  python Tools/python/validate/validate_site.py <site-policy-json-path>
+  python tools/python/validate/validate_site.py <site-policy-json-path>
 """
 
 from pathlib import Path
@@ -17,7 +17,7 @@ SCHEMA = REPO_ROOT / "spec" / "v0.1.0" / "site-policy-schema.json"
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python Tools/python/validate/validate_site.py <site-policy-json-path>")
+        print("Usage: python tools/python/validate/validate_site.py <site-policy-json-path>")
         sys.exit(1)
 
     json_path = Path(sys.argv[1]).resolve()

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://agentobjectmodel.org/spec/v0.1.0/aom-input-schema.json",
+  "$schema": "https://www.agentobjectmodel.org/spec/v0.1.0/aom-input-schema.json",
   "aom_version": "0.1.0",
   "surface_id": "app:policy:no_automation",
   "surface_kind": "screen",

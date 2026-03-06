@@ -10,4 +10,4 @@
 
 For **open** or **allowed** pages, use your own AOM (e.g. from [examples](../../)) or build one from the core schema; there is no separate page template for those in this folder.
 
-**Validation:** Validate with `Tools/node/validate` or `Tools/python/validate` against `spec/v0.1.0/aom-input-schema.json` before deploying.
+**Validation:** Validate with `tools/node/validate` or `tools/python/validate` against `spec/v0.1.0/aom-input-schema.json` before deploying.

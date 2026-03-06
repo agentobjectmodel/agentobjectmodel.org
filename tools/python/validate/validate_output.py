@@ -3,7 +3,7 @@
 Validate an AOM agent output (aom-output-schema.json).
 
 Usage:
-  python Tools/python/validate/validate_output.py <output-json-path>
+  python tools/python/validate/validate_output.py <output-json-path>
 """
 
 from pathlib import Path
@@ -17,7 +17,7 @@ SCHEMA = REPO_ROOT / "spec" / "v0.1.0" / "aom-output-schema.json"
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python Tools/python/validate/validate_output.py <output-json-path>")
+        print("Usage: python tools/python/validate/validate_output.py <output-json-path>")
         sys.exit(1)
 
     json_path = Path(sys.argv[1]).resolve()

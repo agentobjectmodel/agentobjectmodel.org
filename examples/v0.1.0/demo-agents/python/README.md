@@ -13,7 +13,7 @@ python examples/v0.1.0/demo-agents/python/demo_agent.py --folder v0.1.0/login-si
 python examples/v0.1.0/demo-agents/python/demo_agent.py --folder v0.1.0/ecom-flow --test-case _step01_product.success.output
 ```
 
-Ensure `examples/<folder>/outputs/` exist (run [create-outputs](../../../../Tools/testing/README.md) first). For example, `--folder v0.1.0/login-single` expects `examples/v0.1.0/login-single/outputs/`.
+Ensure `examples/<folder>/outputs/` exist (run [create-outputs](../../../../tools/testing/README.md) first). For example, `--folder v0.1.0/login-single` expects `examples/v0.1.0/login-single/outputs/`.
 
 When resolving outputs, the Python demo agent prefers `<stem>.output.json`, but if that file does not exist it will fall back to `<stem>.json.skip` (hand-edited outputs that `create-outputs` will not overwrite).
 

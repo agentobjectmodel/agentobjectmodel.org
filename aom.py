@@ -31,27 +31,27 @@ def run(cmd: List[str]) -> int:
 # ---- validate commands ----
 
 def cmd_validate_input(args: argparse.Namespace) -> int:
-    return run(["python", "Tools/python/validate/validate_input.py", args.file])
+    return run(["python", "tools/python/validate/validate_input.py", args.file])
 
 
 def cmd_validate_output(args: argparse.Namespace) -> int:
-    return run(["python", "Tools/python/validate/validate_output.py", args.file])
+    return run(["python", "tools/python/validate/validate_output.py", args.file])
 
 
 def cmd_validate_site(args: argparse.Namespace) -> int:
-    return run(["python", "Tools/python/validate/validate_site.py", args.file])
+    return run(["python", "tools/python/validate/validate_site.py", args.file])
 
 
 def cmd_validate_all(args: argparse.Namespace) -> int:
     target = args.examples_dir or f"examples/v{args.version}"
-    return run(["python", "Tools/python/validate/validate_all.py", target])
+    return run(["python", "tools/python/validate/validate_all.py", target])
 
 
 # ---- create-outputs ----
 
 def cmd_create_outputs(args: argparse.Namespace) -> int:
     # Existing script discovers examples under examples/
-    return run(["python", "Tools/python/create-outputs/create_outputs.py"])
+    return run(["python", "tools/python/create-outputs/create_outputs.py"])
 
 
 # ---- demo commands ----

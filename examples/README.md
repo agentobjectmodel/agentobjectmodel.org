@@ -29,11 +29,11 @@ python aom.py create-outputs
 node   aom.mjs create-outputs
 ```
 
-This discovers every `*.aom.json` under `examples/` and writes success, failed, and (when applicable) escalated outputs. To avoid overwriting hand-edited files, add a `.skip` marker (see [Tools/testing/README.md](../Tools/testing/README.md)).
+This discovers every `*.aom.json` under `examples/` and writes success, failed, and (when applicable) escalated outputs. To avoid overwriting hand-edited files, add a `.skip` marker (see [tools/testing/README.md](../tools/testing/README.md)).
 
 ## Validating a single folder (advanced)
 
 ```bash
-python Tools/python/validate/validate_all.py v0.1.0/ecom-flow
-node Tools/node/validate/validate_all.js v0.1.0/ecom-flow
+python tools/python/validate/validate_all.py v0.1.0/ecom-flow
+node tools/node/validate/validate_all.js v0.1.0/ecom-flow
 ```

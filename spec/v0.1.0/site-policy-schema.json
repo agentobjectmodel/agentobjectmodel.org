@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://agentobjectmodel.org/spec/v0.1.0/site-policy-schema.json",
+    "$id": "https://www.agentobjectmodel.org/spec/v0.1.0/site-policy-schema.json",
     "title": "AOM Site Policy Schema v0.1.0",
     "description": "Site-wide automation policy served at /.well-known/aom-policy.json",
     "type": "object",
