@@ -58,33 +58,48 @@ AOM defines **two** machine-readable contracts. Both are required for AOM-compli
 
 ### Where the documents fit
 
-The diagram below shows how surfaces (input) and outputs are produced and consumed, and where the files in this repo live.
+The diagram below shows the **runtime flow**: User triggers the workflow; Master Agent sends Input AOM (surface) to the Worker Agent; the Agent reads surfaces, performs actions, and moves between surfaces (e.g. Surface A → Surface A/B); surfaces serve Input AOM and return Success or Error; the Agent then informs the User and Master with Output AOM.
 
 ```mermaid
-flowchart LR
-  subgraph Site
-    A[Publish surface]
-  end
-  subgraph Agent
-    B[Read surface]
-    C[Produce output]
-  end
-  subgraph Repo
-    D["spec/ (schemas)"]
-    E["examples/ (surfaces + outputs)"]
-    F["tools/ (validators, create-outputs)"]
-  end
-  A -->|"*.aom.json"| B
-  B --> C
-  C -->|"*.output.json"| AgentOwner[Agent owner / aom.tools]
-  C -->|"action-invocation request"| Site
-  D -.->|"validate"| E
-  F -.->|"validate, generate"| E
+sequenceDiagram
+    autonumber
+
+    actor User as User
+    participant Master as Master Agent
+    participant Agent as Worker Agent
+    participant Surf1 as Surface A
+    participant Surf2 as Surface A/B
+
+    %% 0. User triggers workflow (Master and Agent); Master sends Input AOM to Agent
+    User->>Master: Triggers workflow
+    User->>Agent: Triggers workflow
+    Master->>Agent: Sends Input AOM step n
+
+    %% 1. Reads Input AOM
+    Agent->>Surf1: Reads Input AOM
+    Surf1-->>Agent: Serves Input AOM
+
+    %% 2. Performs action
+    Agent->>Surf1: Performs action Submit
+
+    %% 3. Submits same or next surface
+    Surf1->>Surf2: Submits same or next surface
+
+    %% 4. Waits for surface, gets Success or Error
+    Agent-->>Surf2: Waits for surface
+    Surf2-->>Agent: Serves Input AOM
+    Agent->>Surf2: Reads Input AOM
+    Surf2-->>Agent: Returns Success or Error
+
+    %% 5. Agent informs User and Master; Master informs User
+    Agent->>User: Informs Output AOM
+    Agent->>Master: Informs Master Output AOM
+    Master->>User: Informs Output AOM
 ```
 
-- **Site** publishes an AOM surface (input) per page or component. The agent receives this as `*.aom.json` (or equivalent JSON).
-- **Agent** reads the surface, decides an action, and produces an **output** (`*.output.json`). The full output is for the agent owner (and e.g. logging at aom.tools). When the agent invokes an action, it sends an **action-invocation request** (action_id, params, and optionally agent_id, agent_name) to the site.
-- **This repo**: `spec/v0.1.0/` holds the schemas; `examples/v0.1.0/` holds sample surfaces and golden outputs; `tools/` holds validators and `create-outputs` to generate outputs from surfaces. Use the schemas to validate your own `*.aom.json` and `*.output.json` files.
+- **Input AOM** (surfaces): The site publishes `*.aom.json` per page or component; the Agent receives and reads them. Surfaces describe purpose, tasks, entities, actions, state, navigation, and signals.
+- **Output AOM**: The Agent produces `*.output.json` (thought, action, result, meta). The full output is for the agent owner (and e.g. logging at aom.tools). When the Agent invokes an action, it sends an **action-invocation request** (action_id, params, and optionally agent_id, agent_name) to the site.
+- **This repo**: `spec/v0.1.0/` holds the schemas; `examples/v0.1.0/` holds sample surfaces and golden outputs; `tools/` holds validators and `create-outputs`. Use the schemas to validate your own `*.aom.json` and `*.output.json` files.
 
 ## Versioning
 
