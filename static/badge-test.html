@@ -24,6 +24,28 @@
   <title>AOM Badge Theme Test — Template</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="color-scheme" content="light dark">
+  <script type="application/ld+json" id="aom-surface">
+  {
+    "automation_policy": "open",
+    "aom_version": "0.1.0",
+    "surface_id": "agentobjectmodel.org:static:badge-test",
+    "surface_kind": "screen",
+    "purpose": {
+      "primary_goal": "Demonstrate AOM policy badges (no-automation, ready, open) and theme-aware rendering.",
+      "user_roles": ["guest", "developer"]
+    },
+    "context": {
+      "app_name": "agentobjectmodel.org",
+      "locale": "en-US"
+    },
+    "tasks": [],
+    "entities": {},
+    "actions": [],
+    "state": {},
+    "navigation": {},
+    "signals": {}
+  }
+  </script>
   <style>
     :root { color-scheme: light dark; }
     body {
@@ -181,6 +203,7 @@
   <details class="template-usage">
     <summary>Using this as a template</summary>
     <ul>
+      <li>This page includes the <strong>AOM script</strong>: <code>&lt;script type="application/ld+json" id="aom-surface"&gt;</code> with a minimal surface JSON (<code>automation_policy</code>, <code>surface_id</code>, <code>purpose</code>, etc.). Agents can read it as the source of truth for this page’s policy.</li>
       <li>Copy the <code>.card</code> + <code>img.badge</code> pattern; use <code>--card-bg</code> (or your surface color) so SVG transparent areas match.</li>
       <li>Theme: set <code>body[data-theme="dark"]</code> or use <code>prefers-color-scheme</code>; one asset set works for light and dark.</li>
       <li>URLs: relative <code>aom-badges/...</code> when in this directory; use canonical URLs from <a href="USAGE.md">USAGE.md</a> when embedding on your site.</li>

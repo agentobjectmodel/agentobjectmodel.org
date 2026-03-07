@@ -12,7 +12,7 @@ import { spawnSync } from "child_process";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ORG_ROOT = path.resolve(__dirname, "..", "..", "..", "..", "..");
-const CORE_VALIDATOR = path.join(ORG_ROOT, "Tools", "node", "validate", "validate_site.js");
+const CORE_VALIDATOR = path.join(ORG_ROOT, "tools", "node", "validate", "validate_site.js");
 
 function main() {
   const args = process.argv.slice(2);

@@ -1,4 +1,4 @@
-# Tools
+# tools
 
 Run all commands **from the repository root**. Use `aom.py` (Python) or `aom.mjs` (Node) as the main CLI.
 

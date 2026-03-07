@@ -1,4 +1,4 @@
-# Agent Object Model™ (AOM)™ · Spec and Tools
+# Agent Object Model™ (AOM)™ · Spec and tools
 
 [![Version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/agentobjectmodel/agentobjectmodel.org/releases) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
@@ -20,7 +20,7 @@ Agent Object Model and AOM are trademarks; registration has been filed. See [Tra
 - [Repository Structure](#repository-structure)
 - [Getting Started](#getting-started)
 - [Examples](#examples)
-- [Tools and Validators](#tools-and-validators)
+- [tools and validators](#tools-and-validators)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
@@ -284,7 +284,7 @@ See [examples/README.md](examples/README.md) for details and validation instruct
 
 ---
 
-## Tools and Validators
+## tools and validators
 
 - **Unified CLI**: `aom.py` (Python) and `aom.mjs` (Node) — validate input/output/site/all, create-outputs, demo run/test.
 - **Validators**: Python and Node against `aom-input-schema.json`, `aom-output-schema.json`, and `site-policy-schema.json`.
@@ -340,7 +340,7 @@ MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in
 - **Spec and standards**: [standards@agentobjectmodel.org](mailto:standards@agentobjectmodel.org)
 - **Key docs**: [spec/v0.1.0/README.md](spec/v0.1.0/README.md), [spec/well-known-policy.md](spec/well-known-policy.md), [tools/README.md](tools/README.md), [COMMANDS.md](COMMANDS.md), [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Trademark**: [static/TRADEMARK-NOTICE.md](static/TRADEMARK-NOTICE.md)
-- **Tools and integrations** (aom.tools): plugins, browser extension, and agent kits — direct downloads:
+- **tools and integrations** (aom.tools): plugins, browser extension, and agent kits — direct downloads:
   - **Plugins:** [WordPress](https://aom.tools/releases/aom-policy-wp.zip) · [Next.js](https://aom.tools/releases/aom-next-middleware.zip) · [Static site](https://aom.tools/releases/aom-static-site-snippets.zip) · [Nuxt](https://aom.tools/releases/aom-nuxt-middleware.zip) · [Gatsby](https://aom.tools/releases/aom-gatsby.zip) · [Shopify](https://aom.tools/releases/aom-shopify.zip)
   - **Browser extension:** [AOM Surface Explorer (Chromium)](https://aom.tools/releases/aom-surface-explorer-chromium.zip)
   - **Agent kits:** [Python](https://aom.tools/releases/aom-agent-kit-python.zip) · [Node](https://aom.tools/releases/aom-agent-kit-node.zip)

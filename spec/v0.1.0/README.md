@@ -295,7 +295,7 @@ When the agent realizes it needs to escalate (either due to the surface's `a2h_p
 
 ## Validation tools
 
-Tools are organized by language under **tools/** so you can use only Python or only Node. See [tools/README.md](../../tools/README.md).
+tools are organized by language under **tools/** so you can use only Python or only Node. See [tools/README.md](../../tools/README.md).
 
 ### Python
 
