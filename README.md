@@ -256,7 +256,7 @@ Key entrypoints: `aom.py`, `aom.mjs`, and [COMMANDS.md](COMMANDS.md).
 1. Serve `/.well-known/aom-policy.json` (see [well-known-policy.md](spec/well-known-policy.md) and [spec/v0.1.0/templates/site-policy/](spec/v0.1.0/templates/site-policy/)).
 2. Embed AOM or JSON-LD in pages where you want agent automation.
 3. Reference plugins (WordPress, Next.js, Nuxt, Gatsby, Shopify, static-site) and the browser extension are available at [aom.tools](https://aom.tools); direct downloads: [plugins and extension](#community-and-support) in Community and Support.
-4. Optional: use [badges](static/USAGE.md) to signal automation policy to users.
+4. Optional: use [policy badges](https://www.agentobjectmodel.org/static/USAGE.html) to signal automation policy to users (usage guide and copy-paste HTML on the site).
 
 In **`automation_policy: "allowed"` (READY)** mode you decide which actions the agent can see and perform: if you do **not** include a password reset or change-password flow in the surface’s `tasks` / `actions`, a conforming agent cannot invoke those operations or see the associated sensitive state. You can keep higher‑risk flows on separate surfaces with stricter policy or A2H requirements.
 
@@ -340,6 +340,8 @@ MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in
 - **Spec and standards**: [standards@agentobjectmodel.org](mailto:standards@agentobjectmodel.org)
 - **Key docs**: [spec/v0.1.0/README.md](spec/v0.1.0/README.md), [spec/well-known-policy.md](spec/well-known-policy.md), [tools/README.md](tools/README.md), [COMMANDS.md](COMMANDS.md), [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Trademark**: [static/TRADEMARK-NOTICE.md](static/TRADEMARK-NOTICE.md)
+- **Badges**: [Usage guide and HTML examples](https://www.agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, AOM Ready, No Automation. Example (links to guide):
+  [![AOM Open](https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg)](https://www.agentobjectmodel.org/static/USAGE.html)
 - **tools and integrations** (aom.tools): plugins, browser extension, and agent kits — direct downloads:
   - **Plugins:** [WordPress](https://aom.tools/releases/aom-policy-wp.zip) · [Next.js](https://aom.tools/releases/aom-next-middleware.zip) · [Static site](https://aom.tools/releases/aom-static-site-snippets.zip) · [Nuxt](https://aom.tools/releases/aom-nuxt-middleware.zip) · [Gatsby](https://aom.tools/releases/aom-gatsby.zip) · [Shopify](https://aom.tools/releases/aom-shopify.zip)
   - **Browser extension:** [AOM Surface Explorer (Chromium)](https://aom.tools/releases/aom-surface-explorer-chromium.zip)
