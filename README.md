@@ -102,7 +102,7 @@ Instead of raw HTML, agents receive a **clean, semantic AOM JSON document** with
 }
 ```
 
-**Result:** Agent sees purpose, tasks, entities, and allowed actions. No layout noise; automation policy can restrict to AOM-only (READY / `allowed`) or allow more (OPEN / `open`).
+**Result:** Agent sees purpose, tasks, entities, and allowed actions. No layout noise; automation policy can restrict to AOM-only (READY / `allowed`) or allow more (OPEN / `open`). *(The snippet above is illustrative; a full valid surface also includes required `generated_at`, `state`, `navigation`, and `signals` — see [spec](spec/v0.1.0/README.md).)*
 
 **AOM's answer:**
 
@@ -111,7 +111,7 @@ Instead of raw HTML, agents receive a **clean, semantic AOM JSON document** with
 - **Automation policy**: Site-level and per-surface rules (`forbidden` | `allowed` | `open`) advertised via `/.well-known/aom-policy.json` and JSON-LD in `<head>`.
 - **Tooling**: Validators and demo agents in this repo; reference plugins and the browser extension at [aom.tools](https://aom.tools).
 
-See [spec/v0.1.0/README.md](spec/v0.1.0/README.md) for the full formal model.
+See [spec/v0.1.0/README.md](spec/v0.1.0/README.md) for the full formal model and a [diagram of where the documents fit](spec/v0.1.0/README.md#where-the-documents-fit) (surface → agent → output → request to site; and where schemas, examples, and tools live in this repo).
 
 ---
 
@@ -225,7 +225,7 @@ agentobjectmodel.org/
 │   │   └── templates/site-policy/
 │   └── well-known-policy.md
 ├── examples/
-│   └── v0.1.0/                   # login-single, ecom-flow, _forbidden-page-template, demo-agents
+│   └── v0.1.0/                   # login-single, ecom-flow, _forbidden-page-template (minimal *.aom.json), demo-agents
 ├── tools/                        # Python + Node: validate, create-outputs, testing
 ├── static/                      # Badges, USAGE.md, badge-test.html, TRADEMARK-NOTICE.md
 ├── .well-known/                 # Example site policy JSON
@@ -276,7 +276,7 @@ In **`automation_policy: "allowed"` (READY)** mode you decide which actions the 
 |---------|---------|----------|
 | **Login single** | Single-shot sign-in surface (READY guardrails) | `examples/v0.1.0/login-single/` |
 | **Ecom flow** | Multi-step checkout flow | `examples/v0.1.0/ecom-flow/` |
-| **Forbidden page template** | Page-level no-automation | `examples/v0.1.0/_forbidden-page-template/` |
+| **Forbidden page template** | Page-level no-automation (minimal valid surface) | [examples/v0.1.0/_forbidden-page-template/](examples/v0.1.0/_forbidden-page-template/) — `aom-policy.forbidden.page.aom.json` |
 
 Demo agents (Python + Node) that consume surfaces and produce conformant outputs live in [examples/v0.1.0/demo-agents/](examples/v0.1.0/demo-agents/).
 

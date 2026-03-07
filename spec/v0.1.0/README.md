@@ -11,12 +11,14 @@ This directory contains the complete JSON Schema definitions for the Agent Objec
 **Validates**: `*.aom.json` files in `examples/` (for example `examples/v0.1.0/`)
 
 **Key sections**:
-- `automation_policy` — (Optional) Agent automation policy for a surface: `forbidden` \| `allowed` \| `open`. Conceptually:
+- `automation_policy` — (Required) Agent automation policy for a surface: `forbidden` \| `allowed` \| `open`. Conceptually:
   - `forbidden` — No automation; agents may read only enough AOM/policy to learn this rule, then MUST stop using this surface.
   - `allowed` — **READY / guardrailed mode**; agents MUST treat the AOM as the only source of truth for actions and MUST NOT act based on DOM/HTML or other page content outside the AOM.
   - `open` — Permissive mode; agents MAY go beyond the AOM’s explicit actions, using additional page content to infer reasonable actions (while still obeying global safety rules).
+- `generated_at` — (Required) ISO 8601 timestamp when this AOM document was generated.
+- `calling_agent` — (Optional) Identifies the agent requesting this surface and/or declares that when the agent submits a request on this site it must include `agent_id` (and optionally `agent_name`) in that request; standard field names are `agent_id` and `agent_name`. See [Agent identity and traceability](#agent-identity-and-traceability).
 - `purpose` — Primary goal and user roles
-- `tasks` — Explicit tasks the surface supports, including `default_action_id`
+- `tasks` — Explicit tasks the surface supports, including `default_action_id`, `success_conditions` (min one)
 - `entities` — Domain objects with schema (including `validation`), and current values
 - `actions` — Operations agents can perform, including `priority` ranking and `method`
 - `state` — Session and workflow state, including `flow_id` tracking
@@ -32,6 +34,9 @@ This directory contains the complete JSON Schema definitions for the Agent Objec
 **Validates**: `*.output.json` files in **Examples/** or **examples/** (typically under each surface’s **outputs/** folder).
 
 **Key sections**:
+- `agent_id` — (Optional) Identifier of the agent producing this output. When the surface declares `calling_agent.agent_id_required`, the agent MUST include this in the output and in the action-invocation request to the site for traceability.
+- `agent_name` — (Optional) Human-readable name of the agent; include when the surface requires it or for logging (e.g. aom.tools).
+- `key_issuer` — (Optional) Issuer of `agent_id` (e.g. 'aom.tools').
 - `mode` — `"single"` (one-shot) or `"flow"` (multi-step)
 - `thought` — Agent's reasoning (for debugging/transparency)
 - `action` — Requested action with `action_id` + `params`
@@ -50,6 +55,36 @@ AOM defines **two** machine-readable contracts. Both are required for AOM-compli
 |-------------|----------------------------|-----------------|-----------------------------------------------------------------------|
 | **Surface** | `aom-input-schema.json`    | `*.aom.json`    | Describes what the agent sees (UI state, available actions, entities) |
 | **Output**  | `aom-output-schema.json`   | `*.output.json` | Describes what the agent does (thought, action, result, confidence)   |
+
+### Where the documents fit
+
+The diagram below shows how surfaces (input) and outputs are produced and consumed, and where the files in this repo live.
+
+```mermaid
+flowchart LR
+  subgraph Site
+    A[Publish surface]
+  end
+  subgraph Agent
+    B[Read surface]
+    C[Produce output]
+  end
+  subgraph Repo
+    D["spec/ (schemas)"]
+    E["examples/ (surfaces + outputs)"]
+    F["tools/ (validators, create-outputs)"]
+  end
+  A -->|"*.aom.json"| B
+  B --> C
+  C -->|"*.output.json"| AgentOwner[Agent owner / aom.tools]
+  C -->|"action-invocation request"| Site
+  D -.->|"validate"| E
+  F -.->|"validate, generate"| E
+```
+
+- **Site** publishes an AOM surface (input) per page or component. The agent receives this as `*.aom.json` (or equivalent JSON).
+- **Agent** reads the surface, decides an action, and produces an **output** (`*.output.json`). The full output is for the agent owner (and e.g. logging at aom.tools). When the agent invokes an action, it sends an **action-invocation request** (action_id, params, and optionally agent_id, agent_name) to the site.
+- **This repo**: `spec/v0.1.0/` holds the schemas; `examples/v0.1.0/` holds sample surfaces and golden outputs; `tools/` holds validators and `create-outputs` to generate outputs from surfaces. Use the schemas to validate your own `*.aom.json` and `*.output.json` files.
 
 ## Versioning
 
@@ -82,6 +117,15 @@ These mirror the design intent throughout the spec:
 5. **Layout-free** — no CSS, coordinates, or presentation noise.
 6. **Semantic-only** — meaning first; avoid DOM coupling.
 7. **Automation guardrails** — `forbidden` / `allowed` / `open` control how agents may use the surface.
+
+## Agent identity and traceability
+
+Agent identity (**agent_id**, **agent_name**) lives in the **output** and in the **request** the agent sends to the site when invoking an action. The **input** (surface) does not contain the agent's identity; it may **declare** that when the agent submits a request on this site it must include `agent_id` (and optionally `agent_name`) in that request.
+
+- **Output schema**: Top-level `agent_id`, optional `agent_name`, optional `key_issuer`. The agent fills these when producing an output; the same values are sent in the action-invocation request to the site.
+- **Input schema**: Optional `calling_agent` can identify the agent requesting the surface and/or declare requirements (`agent_id_required`, `agent_name_required`). Standard field names in the request are **agent_id** and **agent_name**.
+- **Action-invocation request**: When the agent invokes an action, the payload to the site SHOULD include top-level `agent_id` and optionally `agent_name` (same as in the output). Site owners MAY log them for traceability. Optional today; as the ecosystem matures, surfaces may require them.
+- **Logging**: The full output is for the agent owner (and e.g. aom.tools); the site does not receive the full output. The site receives only the action-invocation request (action_id, params, and optionally agent_id, agent_name).
 
 ## Design Principles
 
@@ -131,8 +175,8 @@ Both schemas use **JSON Schema Draft 2020-12**:
 ### Required vs Optional Fields
 
 **Input/core schema** (`aom-input-schema.json`):
-- **Required**: `aom_version`, `surface_id`, `surface_kind`, `purpose`, `context`, `tasks`, `entities`, `actions`, `state`, `navigation`, `signals`
-- **Optional**: `generated_at`, `generator`, `a2h`
+- **Required**: `automation_policy`, `aom_version`, `surface_id`, `surface_kind`, `generated_at`, `purpose`, `context`, `tasks`, `entities`, `actions`, `state`, `navigation`, `signals`
+- **Optional**: `generator`, `calling_agent`, `a2h`
 
 **Output schema** (`aom-output-schema.json`):
 - **Required**: `mode`, `action` (with `action_id`), `meta` (with `done` and `confidence`)

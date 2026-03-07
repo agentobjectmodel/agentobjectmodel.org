@@ -3,6 +3,7 @@
     "aom_version": "0.1.0",
     "surface_id": "app:auth:login",
     "surface_kind": "screen",
+    "generated_at": "2025-01-01T00:00:00Z",
     "purpose": {
       "primary_goal": "Authenticate the user and establish a session.",
       "user_roles": ["guest", "anonymous"]

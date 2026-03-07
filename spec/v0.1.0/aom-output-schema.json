@@ -21,7 +21,15 @@
     },
     "agent_id": {
       "type": "string",
-      "description": "Logical name or identifier of the agent producing this output."
+      "description": "Identifier of the agent producing this output. When the surface declares calling_agent (agent_id_required), the agent MUST include this in the output and in the action-invocation request to the site for traceability."
+    },
+    "agent_name": {
+      "type": "string",
+      "description": "Human-readable name of the agent. Optional; include when the surface requires it or for logging (e.g. aom.tools)."
+    },
+    "key_issuer": {
+      "type": "string",
+      "description": "Issuer of agent_id (e.g. 'aom.tools'). Optional; aligns with input calling_agent.key_issuer when present."
     },
     "step_id": {
       "type": "string",

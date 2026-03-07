@@ -116,11 +116,11 @@ def ensure_outputs_for_surface(surface_path: Path, examples_dir: Path, generate_
     success_path = output_dir / f"_{base}.success.output.json"
     if _is_hand_edited(success_path):
         counts["skipped"]["success"] = 1
-        print(f"  ⏭️  {success_path.relative_to(REPO_ROOT)} (hand-edited, .skip)")
+        print(f"  [skip] {success_path.relative_to(REPO_ROOT)} (hand-edited, .skip)")
     else:
         success_path.write_text(json.dumps(success_output, indent=2), encoding="utf-8")
         counts["created"]["success"] = 1
-        print(f"  📝 {success_path.relative_to(REPO_ROOT)}")
+        print(f"  [out] {success_path.relative_to(REPO_ROOT)}")
 
     a2h_defaults = _get_a2h_defaults(aom)
     for tc in test_cases:
@@ -135,12 +135,12 @@ def ensure_outputs_for_surface(surface_path: Path, examples_dir: Path, generate_
         failed_path = output_dir / f"{base}.{tc_name}.failed.output.json"
         if _is_hand_edited(failed_path):
             counts["skipped"]["failed"] += 1
-            print(f"  ⏭️  {failed_path.relative_to(REPO_ROOT)} (hand-edited, .skip)")
+            print(f"  [skip] {failed_path.relative_to(REPO_ROOT)} (hand-edited, .skip)")
         else:
             failed_output = build_output_from_aom(aom, success=False, error_message=error_message, a2h_intent=a2h_intent)
             failed_path.write_text(json.dumps(failed_output, indent=2), encoding="utf-8")
             counts["created"]["failed"] += 1
-            print(f"  📝 {failed_path.relative_to(REPO_ROOT)}")
+            print(f"  [out] {failed_path.relative_to(REPO_ROOT)}")
 
     if aom.get("a2h"):
         a2h_intent = {
@@ -151,12 +151,12 @@ def ensure_outputs_for_surface(surface_path: Path, examples_dir: Path, generate_
         escalated_path = output_dir / f"_{base}.escalated.output.json"
         if _is_hand_edited(escalated_path):
             counts["skipped"]["escalated"] = 1
-            print(f"  ⏭️  {escalated_path.relative_to(REPO_ROOT)} (hand-edited, .skip)")
+            print(f"  [skip]  {escalated_path.relative_to(REPO_ROOT)} (hand-edited, .skip)")
         else:
             escalated_output = build_output_from_aom(aom, success=False, error_message=None, a2h_intent=a2h_intent)
             escalated_path.write_text(json.dumps(escalated_output, indent=2), encoding="utf-8")
             counts["created"]["escalated"] = 1
-            print(f"  📝 {escalated_path.relative_to(REPO_ROOT)}")
+            print(f"  [out] {escalated_path.relative_to(REPO_ROOT)}")
 
     return counts
 
@@ -201,7 +201,7 @@ def main():
     total_c = sum(c["success"] + c["failed"] + c["escalated"] for _, counts in summary for c in [counts["created"]])
     total_s = sum(s["success"] + s["failed"] + s["escalated"] for _, counts in summary for s in [counts["skipped"]])
     print(f"  Total: {total_c} created, {total_s} skipped")
-    print("\n🎉 Done.")
+    print("\nDone.")
 
 
 if __name__ == "__main__":

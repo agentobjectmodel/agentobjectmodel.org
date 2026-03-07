@@ -3,6 +3,7 @@
   "aom_version": "0.1.0",
   "surface_id": "app:shop:cart",
   "surface_kind": "screen",
+  "generated_at": "2025-01-01T00:00:00Z",
   "purpose": {
     "primary_goal": "Review cart and proceed to checkout.",
     "user_roles": ["guest", "customer"]

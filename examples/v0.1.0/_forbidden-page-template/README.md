@@ -6,7 +6,7 @@
 
 | File | Policy | Use when |
 |------|--------|----------|
-| [aom-policy.forbidden.page.json](aom-policy.forbidden.page.json) | `automation_policy: "forbidden"` | This page must not be automated by agents. Publish this AOM with the page and show the no-automation logo. |
+| [aom-policy.forbidden.page.aom.json](aom-policy.forbidden.page.aom.json) | `automation_policy: "forbidden"` | This page must not be automated by agents. Publish this AOM with the page and show the no-automation logo. This file is the **minimal valid AOM surface** (all required fields, empty where none needed). |
 
 For **open** or **allowed** pages, use your own AOM (e.g. from [examples](../../)) or build one from the core schema; there is no separate page template for those in this folder.
 

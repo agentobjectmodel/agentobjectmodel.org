@@ -40,8 +40,8 @@ tools/
 From repo root, if you need to call scripts directly instead of the CLI:
 
 **All examples:**  
-`python tools/python/validate/validate_all.py`
-`node tools/node/validate/validate_all.js`
+`python tools/python/validate/validate_all.py v0.1.0`  
+`node tools/node/validate/validate_all.js v0.1.0`
 
 **Create outputs:**  
 `python tools/python/create-outputs/create_outputs.py`
@@ -69,7 +69,7 @@ The **AOM Surface Explorer** is a companion Chrome/Chromium extension (shipped s
 
 - **Generate AOM**: a content script inspects the current page and injects:
   - `<script type="application/ld+aom+json" id="aom-surface">…</script>`
-  - The JSON is a best-effort AOM surface aligned to `spec/v0.1.0/aom-input-schema.json` (fields such as `automation_policy`, `aom_version`, `surface_id`, `surface_kind`, `purpose`, `context`, `tasks`, `entities`, `actions`, `state`, `navigation`, `signals`).
+  - The JSON is a best-effort AOM surface aligned to `spec/v0.1.0/aom-input-schema.json` (required: `automation_policy`, `aom_version`, `surface_id`, `surface_kind`, `generated_at`, `purpose`, `context`, `tasks`, `entities`, `actions`, `state`, `navigation`, `signals`).
 - **Read / copy AOM**: the popup reads `#aom-surface` from the active tab and lets you copy the JSON so you can:
   - Paste it into files under `examples/` for experimentation, or
   - Pipe it into the CLIs below for validation or further tooling.

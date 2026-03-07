@@ -3,6 +3,7 @@
   "aom_version": "0.1.0",
   "surface_id": "app:shop:confirmation",
   "surface_kind": "screen",
+  "generated_at": "2025-01-01T00:00:00Z",
   "purpose": {
     "primary_goal": "View order confirmation.",
     "user_roles": ["customer"]
