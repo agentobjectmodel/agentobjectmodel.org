@@ -227,7 +227,7 @@ agentobjectmodel.org/
 ├── examples/
 │   └── v0.1.0/                   # login-single, ecom-flow, _forbidden-page-template, demo-agents
 ├── tools/                        # Python + Node: validate, create-outputs, testing
-├── static/                      # Badges, USAGE.md, TRADEMARK-NOTICE.md
+├── static/                      # Badges, USAGE.md, badge-test.html, TRADEMARK-NOTICE.md
 ├── .well-known/                 # Example site policy JSON
 ├── aom.py                        # Python CLI
 ├── aom.mjs                       # Node CLI
