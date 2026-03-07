@@ -1,37 +1,28 @@
 # Creating a release
 
-Use this when tagging a new version (e.g. v0.1.0) and publishing it on GitLab.
+Use this when tagging a new version (e.g. v0.1.0) and publishing it on GitHub.
 
 ## One-time: v0.1.0
 
-1. **Commit and push** any final changes to `main` or `master`.
+v0.1.0 is already created. The tag and release live at [GitHub Releases](https://github.com/agentobjectmodel/agentobjectmodel.org/releases).
 
-2. **Create the tag** (from repo root):
+## Updating the latest release (e.g. move v0.1.0 to current master)
+
+If you want the **v0.1.0** release to include the latest commits (e.g. badge-test AOM script, spec/examples redirects, Tools→tools):
+
+1. **From repo root**, move the tag to the current branch and push:
    ```bash
+   git tag -d v0.1.0
    git tag -a v0.1.0 -m "Release v0.1.0"
+   git push origin :refs/tags/v0.1.0
    git push origin v0.1.0
    ```
-   If your default branch is `main`:
-   ```bash
-   git push origin v0.1.0
-   ```
+2. On GitHub, the release at **Releases** → **v0.1.0** will now point at the new commit. The existing release title and notes are unchanged; edit them there if needed.
 
-3. **Create the release in GitLab**
-   - Go to **Deploy** → **Releases** (or `https://gitlab.com/agentobjectmodel/agentobjectmodel.org/-/releases`).
-   - Click **New release**.
-   - **Tag:** select or type `v0.1.0`.
-   - **Release title:** `v0.1.0` or `Agent Object Model v0.1.0`.
-   - **Release notes:** paste the contents of [release-notes/v0.1.0.md](release-notes/v0.1.0.md) (or the v0.1.0 section from [CHANGELOG.md](CHANGELOG.md)).
-   - Save. GitLab will list **Source code (zip)** and **Source code (tar.gz)**; download counts for these assets will increase when people download them.
-
-4. **Verify**
-   - Open the releases page and confirm v0.1.0 appears with the source assets.
-   - The "Latest release" link in the README will point to this release.
-
-## Future releases
+## Future releases (new version, e.g. v0.1.1)
 
 - Bump version in docs/schemas as needed.
 - Add an entry under **Unreleased** or a new version in [CHANGELOG.md](CHANGELOG.md).
 - Create `release-notes/vX.Y.Z.md` if you want paste-ready notes.
-- Tag: `git tag -a vX.Y.Z -m "Release vX.Y.Z"` then `git push origin vX.Y.Z`.
-- Create the release in GitLab as above, using the new tag and notes.
+- **Tag:** `git tag -a vX.Y.Z -m "Release vX.Y.Z"` then `git push origin vX.Y.Z`.
+- **Create the release on GitHub:** **Releases** → **Draft a new release** → choose the tag, set title and paste notes from `release-notes/vX.Y.Z.md` or CHANGELOG. Publish.

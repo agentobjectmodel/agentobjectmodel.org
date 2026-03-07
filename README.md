@@ -280,7 +280,7 @@ In **`automation_policy: "allowed"` (READY)** mode you decide which actions the 
 
 Demo agents (Python + Node) that consume surfaces and produce conformant outputs live in [examples/v0.1.0/demo-agents/](examples/v0.1.0/demo-agents/).
 
-See [examples/README.md](examples/README.md) for details and validation instructions.
+See [examples/v0.1.0/](examples/v0.1.0/) for details and validation instructions.
 
 ---
 
