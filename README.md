@@ -340,8 +340,8 @@ MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in
 - **Spec and standards**: [standards@agentobjectmodel.org](mailto:standards@agentobjectmodel.org)
 - **Key docs**: [spec/v0.1.0/README.md](spec/v0.1.0/README.md), [spec/well-known-policy.md](spec/well-known-policy.md), [tools/README.md](tools/README.md), [COMMANDS.md](COMMANDS.md), [CONTRIBUTING.md](CONTRIBUTING.md)
 - **Trademark**: [static/TRADEMARK-NOTICE.md](static/TRADEMARK-NOTICE.md)
-- **Badges**: [Usage guide and HTML examples](https://www.agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, AOM Ready, No Automation. Example (links to guide):
-  [![AOM Open](https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg)](https://www.agentobjectmodel.org/static/USAGE.html)
+- **Badges**: [Usage guide and HTML examples](https://www.agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, AOM Ready, No Automation. [Theme test page](https://www.agentobjectmodel.org/static/badge-test.html) (light/dark, copy-paste). Example (links to guide):
+  <a href="https://www.agentobjectmodel.org/static/USAGE.html"><img src="https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg" alt="AOM Open" width="48" height="48"></a>
 - **tools and integrations** (aom.tools): plugins, browser extension, and agent kits — direct downloads:
   - **Plugins:** [WordPress](https://aom.tools/releases/aom-policy-wp.zip) · [Next.js](https://aom.tools/releases/aom-next-middleware.zip) · [Static site](https://aom.tools/releases/aom-static-site-snippets.zip) · [Nuxt](https://aom.tools/releases/aom-nuxt-middleware.zip) · [Gatsby](https://aom.tools/releases/aom-gatsby.zip) · [Shopify](https://aom.tools/releases/aom-shopify.zip)
   - **Browser extension:** [AOM Surface Explorer (Chromium)](https://aom.tools/releases/aom-surface-explorer-chromium.zip)
