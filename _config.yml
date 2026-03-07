@@ -1,0 +1,4 @@
+# GitHub Pages (Jekyll): include dot-prefixed dirs that are normally excluded
+include:
+  - .well-known
+  - spec/v0.1.0/templates/site-policy/.well-known
