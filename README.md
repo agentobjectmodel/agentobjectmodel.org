@@ -222,6 +222,7 @@ agentobjectmodel.org/
 │   │   ├── aom-output-schema.json
 │   │   ├── site-policy-schema.json
 │   │   ├── README.md
+│   │   ├── sequence-diagram-for-geeks.md   # Full runtime flow diagram (site/page policy, Input/Output AOM)
 │   │   └── templates/site-policy/
 │   └── well-known-policy.md
 ├── examples/

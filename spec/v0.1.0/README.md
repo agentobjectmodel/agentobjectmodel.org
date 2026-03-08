@@ -58,7 +58,7 @@ AOM defines **two** machine-readable contracts. Both are required for AOM-compli
 
 ### Where the documents fit
 
-The diagram below shows the **runtime flow**: User triggers the workflow; Master Agent sends Input AOM (surface) to the Worker Agent; the Agent reads surfaces, performs actions, and moves between surfaces (e.g. Surface A → Surface A/B); surfaces serve Input AOM and return Success or Error; the Agent then informs the User and Master with Output AOM.
+The diagram below shows the **runtime flow**: the User and the Worker Agent do not communicate directly—all interaction is via the Master Agent. The User triggers the workflow and sends information to the Master; the Master triggers and informs the Worker Agent. The Agent reads surfaces (Input AOM), performs actions, and moves between surfaces (e.g. Surface A → Surface A/B); surfaces serve Input AOM and return Success or Error. The Agent then informs the Master with Output AOM, and the Master informs the User. For the full flow including site and page policy checks, see [Sequence diagram (for geeks)](sequence-diagram-for-geeks.md).
 
 ```mermaid
 sequenceDiagram
@@ -67,38 +67,104 @@ sequenceDiagram
     actor User as User
     participant Master as Master Agent
     participant Agent as Worker Agent
+    participant Site as Site (origin)
     participant Surf1 as Surface A
     participant Surf2 as Surface A/B
 
-    %% 0. User triggers workflow (Master and Agent); Master sends Input AOM to Agent
-    User->>Master: Triggers workflow
-    User->>Agent: Triggers workflow
-    Master->>Agent: Sends Input AOM step n
+    %% 0. User and Agent communicate only via Master
+    User->>Master: Triggers workflow with Information
+    Master->>Agent: Triggers workflow with Information
 
-    %% 1. Reads Input AOM
-    Agent->>Surf1: Reads Input AOM
-    Surf1-->>Agent: Serves Input AOM
+    %% 1. Agent fetches site policy
+    Agent->>Site: GET /.well-known/aom-policy.json
+    Site-->>Agent: Site policy (forbidden | allowed | open)
 
-    %% 2. Performs action
-    Agent->>Surf1: Performs action Submit
+    alt Site policy = forbidden
+        rect rgb(255, 230, 230)
+            Agent->>Master: Surface forbidden (exit)
+            Master->>User: Surface forbidden
+        end
+    else Site policy = allowed or open
+        rect rgb(230, 240, 255)
+            %% 2. First surface serves AOM; Agent reads and checks page policy
+            Surf1-->>Surf1: Serves Input AOM
+            Agent->>Surf1: Reads Input AOM
+            Agent-->>Agent: Checks page automation_policy (forbidden | allowed | open)
 
-    %% 3. Submits same or next surface
-    Surf1->>Surf2: Submits same or next surface
+            alt Page automation_policy = forbidden
+                rect rgb(255, 230, 230)
+                    Agent->>Master: Page forbidden (exit)
+                    Master->>User: Page forbidden
+                end
+            else Page = allowed or open
+                rect rgb(232, 245, 233)
+                    %% 3. Agent checks if it has all data; need more info goes via Master to User
+                    Agent-->>Agent: Checks if it has all data
 
-    %% 4. Waits for surface, gets Success or Error
-    Agent-->>Surf2: Waits for surface
-    Surf2-->>Agent: Serves Input AOM
-    Agent->>Surf2: Reads Input AOM
-    Surf2-->>Agent: Returns Success or Error
+                    alt Has all data
+                        rect rgb(232, 245, 233)
+                            Note over Agent: Proceed with current data
+                        end
+                    else Needs more information
+                        rect rgb(255, 248, 225)
+                            Agent->>Master: No. Give more Information
+                            Master->>User: No. Give more Information
+                            User->>Master: Sends more Information
+                            Master->>Agent: Sends more Information
+                        end
+                    end
 
-    %% 5. Agent informs User and Master; Master informs User
-    Agent->>User: Informs Output AOM
-    Agent->>Master: Informs Master Output AOM
-    Master->>User: Informs Output AOM
-```
+                    Agent->>Surf1: Submits action (fills Input AOM)
+                    Agent->>Surf1: Performs Action of Input AOM
+                    Surf1->>Surf2: Navigates to same or next surface
+                end
+
+                %% 5. Next surface serves AOM; Agent reads and checks page policy again
+                Note over Agent: Waits for next surface
+                Surf2-->>Surf2: Serves Input AOM
+                Agent->>Surf2: Reads Input AOM
+                Agent-->>Agent: Checks page automation_policy (forbidden | allowed | open)
+
+                alt Page automation_policy = forbidden
+                    rect rgb(255, 230, 230)
+                        Agent->>Master: Page forbidden (exit)
+                        Master->>User: Page forbidden
+                    end
+                else Page = allowed or open
+                    rect rgb(240, 248, 255)
+                        %% 6. Success: Agent informs Master, Master informs User. Error: escalate via Master.
+                        Surf2-->>Agent: Returns response
+
+                        alt Success
+                            rect rgb(232, 245, 233)
+                                Agent-->>Agent: Converts Input AOM to Output AOM
+                                Agent->>Master: Informs Output AOM
+                                Master->>User: Informs Output AOM
+                            end
+                        else Error
+                            rect rgb(255, 245, 238)
+                                Agent-->>Agent: Check Error
+                                alt Can Fix
+                                    rect rgb(232, 245, 233)
+                                        Agent->>Surf2: Retry (e.g. read again / resubmit) with Input AOM
+                                    end
+                                else Can't Fix (Converts to Output AOM)
+                                    rect rgb(255, 230, 230)
+                                        Agent->>Master: No. Give more Information with Output AOM
+                                        Master->>User: No. Give more Information with Output AOM
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    ```
 
 - **Input AOM** (surfaces): The site publishes `*.aom.json` per page or component; the Agent receives and reads them. Surfaces describe purpose, tasks, entities, actions, state, navigation, and signals.
-- **Output AOM**: The Agent produces `*.output.json` (thought, action, result, meta). The full output is for the agent owner (and e.g. logging at aom.tools). When the Agent invokes an action, it sends an **action-invocation request** (action_id, params, and optionally agent_id, agent_name) to the site.
+- **Output AOM**: The Agent produces `*.output.json` (thought, action, result, meta). The Agent informs the Master with Output AOM, and the Master informs the User; the full output is also for the agent owner (and e.g. logging at aom.tools). When the Agent invokes an action, it sends an **action-invocation request** (action_id, params, and optionally agent_id, agent_name) to the site.
 - **This repo**: `spec/v0.1.0/` holds the schemas; `examples/v0.1.0/` holds sample surfaces and golden outputs; `tools/` holds validators and `create-outputs`. Use the schemas to validate your own `*.aom.json` and `*.output.json` files.
 
 ## Versioning
