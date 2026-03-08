@@ -161,7 +161,7 @@ sequenceDiagram
             end
         end
     end
-    ```
+```
 
 - **Input AOM** (surfaces): The site publishes `*.aom.json` per page or component; the Agent receives and reads them. Surfaces describe purpose, tasks, entities, actions, state, navigation, and signals.
 - **Output AOM**: The Agent produces `*.output.json` (thought, action, result, meta). The Agent informs the Master with Output AOM, and the Master informs the User; the full output is also for the agent owner (and e.g. logging at aom.tools). When the Agent invokes an action, it sends an **action-invocation request** (action_id, params, and optionally agent_id, agent_name) to the site.
