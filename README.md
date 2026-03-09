@@ -343,8 +343,4 @@ MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in
 - **Trademark**: [static/TRADEMARK-NOTICE.md](static/TRADEMARK-NOTICE.md)
 - **Badges**: [Usage guide and HTML examples](https://www.agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, AOM Ready, No Automation. [Theme test page](https://www.agentobjectmodel.org/static/badge-test.html) (light/dark, copy-paste). Example (links to guide):
   <a href="https://www.agentobjectmodel.org/static/USAGE.html"><img src="https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg" alt="AOM Open" width="48" height="48"></a>
-- **tools and integrations** (aom.tools): plugins, browser extension, and agent kits — direct downloads (v0.1.0):
-  - **Surface plugins:** [WordPress](https://aom.tools/releases/0.1.0/surface-plugins/aom-policy-wp.zip) · [Next.js](https://aom.tools/releases/0.1.0/surface-plugins/aom-next-middleware.zip) · [Nuxt](https://aom.tools/releases/0.1.0/surface-plugins/aom-nuxt-middleware.zip) · [Gatsby](https://aom.tools/releases/0.1.0/surface-plugins/aom-gatsby.zip) · [Shopify](https://aom.tools/releases/0.1.0/surface-plugins/aom-shopify.zip) · [Static site](https://aom.tools/releases/0.1.0/surface-plugins/aom-static-site-snippets.zip)
-  - **Browser extension:** [AOM Surface Explorer (Chromium)](https://aom.tools/releases/0.1.0/extention/aom-surface-explorer-chromium.zip)
-  - **Agent kits:** [Python](https://aom.tools/releases/0.1.0/agent-agent-kits/aom-agent-kit-python.zip) · [Node](https://aom.tools/releases/0.1.0/agent-agent-kits/aom-agent-kit-node.zip)
-  - **Landing:** [Downloads](https://aom.tools/downloads/) · [Surface owners](https://aom.tools/downloads/surface-owners/) · [Agent owners](https://aom.tools/downloads/agent-owners/)
+- **tools and integrations** (aom.tools): plugins, browser extension, and agent kits — see [AOM Tools downloads](https://www.aom.tools/downloads/) for the latest links.
