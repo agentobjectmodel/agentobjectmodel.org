@@ -1,6 +1,6 @@
 # AOM Specification
 
-This directory contains the complete JSON Schema definitions for the Agent Object Model (AOM)™ protocol. **To validate surfaces and outputs**, use the [CLI](../../README.md#quick-start) from the repo root (`aom.py` / `aom.mjs`).
+This directory contains the complete JSON Schema definitions for the Agent Object Model (AOM)™ protocol. **To validate surfaces and outputs**, use the [CLI](../../README.md#quick-start) from the repo root (`aom.py` / `aom.mjs`). For a high-level overview and motivation, see the [AOM v0.1.0 White Paper](../../whitepaper/agent-object-model.html).
 
 ## Schemas
 

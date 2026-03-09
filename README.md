@@ -26,6 +26,7 @@ Agent Object Model and AOM are trademarks; registration has been filed. See [Tra
 - [License](#license)
 - [Why AOM?](#why-aom)
 - [Community and Support](#community-and-support)
+- [White paper](#white-paper)
 
 ---
 
@@ -336,10 +337,17 @@ MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in
 
 ---
 
+## White paper
+
+A concise overview of AOM motivation, architecture, Input/Output AOM, automation policy, and adoption is available as an HTML white paper: [Agent Object Model v0.1.0](whitepaper/agent-object-model.html).
+
+---
+
 ## Community and Support
 
 - **Spec and standards**: [standards@agentobjectmodel.org](mailto:standards@agentobjectmodel.org)
 - **Key docs**: [spec/v0.1.0/README.md](spec/v0.1.0/README.md), [spec/well-known-policy.md](spec/well-known-policy.md), [tools/README.md](tools/README.md), [COMMANDS.md](COMMANDS.md), [CONTRIBUTING.md](CONTRIBUTING.md)
+- **White paper**: [Agent Object Model v0.1.0 (HTML)](whitepaper/agent-object-model.html) — motivation, architecture, Input/Output AOM, policy, and adoption.
 - **Trademark**: [static/TRADEMARK-NOTICE.md](static/TRADEMARK-NOTICE.md)
 - **Badges**: [Usage guide and HTML examples](https://www.agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, AOM Ready, No Automation. [Theme test page](https://www.agentobjectmodel.org/static/badge-test.html) (light/dark, copy-paste). Example (links to guide):
   <a href="https://www.agentobjectmodel.org/static/USAGE.html"><img src="https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg" alt="AOM Open" width="48" height="48"></a>
