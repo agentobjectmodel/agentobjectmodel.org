@@ -1,6 +1,6 @@
 AOM Policy Badges – License
 
-The AOM policy badges (including “No Automation”, “AOM Ready”, and “AOM Open” icons)
+The AOM policy badges (including “No Automation”, “allowed (with guardrails)” (AOM™ mark), and “AOM Open” icons)
 are dedicated to the public domain under the Creative Commons CC0 1.0 Universal
 Public Domain Dedication.
 

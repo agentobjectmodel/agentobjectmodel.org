@@ -24,7 +24,7 @@
     "automation_policy": {
       "type": "string",
       "enum": ["allowed", "forbidden", "open"],
-      "description": "Agent automation policy for this surface. forbidden = no automation; allowed = READY/guardrailed; open = permissive.",
+      "description": "Agent automation policy for this surface. forbidden = no automation; allowed = with guardrails (constrained automation); open = permissive.",
       "default": "allowed"
     },
     "aom_version": {

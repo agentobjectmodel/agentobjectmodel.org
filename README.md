@@ -4,6 +4,8 @@
 
 > A task-centric, entity-driven JSON standard that gives AI agents a clean, automation-aware view of any web page or surface — with zero layout noise, clear tasks, and explicit policies.
 
+**Start here — [white paper (HTML)](whitepaper/agent-object-model.html):** motivation, architecture, Input and Output AOM, automation policy (including the three `automation_policy` modes), and incremental adoption. Read it in the browser before diving into schemas and examples.
+
 **Get the project:** Clone this repo or [download ZIP](https://github.com/agentobjectmodel/agentobjectmodel.org/archive/refs/heads/master.zip) — spec, schemas, examples, and validators in one package. Latest release: [v0.1.0](https://github.com/agentobjectmodel/agentobjectmodel.org/releases).
 
 Agent Object Model and AOM are trademarks; registration has been filed. See [Trademark Notice](static/TRADEMARK-NOTICE.md). This repo is the canonical source for the AOM spec and reference tooling (https://www.agentobjectmodel.org).
@@ -12,6 +14,7 @@ Agent Object Model and AOM are trademarks; registration has been filed. See [Tra
 
 ## Table of Contents
 
+- [White paper (recommended first read)](#white-paper)
 - [The Problem](#the-problem)
 - [The Solution](#the-solution)
 - [Quick Start](#quick-start)
@@ -26,7 +29,6 @@ Agent Object Model and AOM are trademarks; registration has been filed. See [Tra
 - [License](#license)
 - [Why AOM?](#why-aom)
 - [Community and Support](#community-and-support)
-- [White paper](#white-paper)
 
 ---
 
@@ -103,7 +105,7 @@ Instead of raw HTML, agents receive a **clean, semantic AOM JSON document** with
 }
 ```
 
-**Result:** Agent sees purpose, tasks, entities, and allowed actions. No layout noise; automation policy can restrict to AOM-only (READY / `allowed`) or allow more (OPEN / `open`). *(The snippet above is illustrative; a full valid surface also includes required `generated_at`, `state`, `navigation`, and `signals` — see [spec](spec/v0.1.0/README.md).)*
+**Result:** Agent sees purpose, tasks, entities, and allowed actions. No layout noise; automation policy can restrict to AOM-only (`allowed` with guardrails) or allow more (`open`). *(The snippet above is illustrative; a full valid surface also includes required `generated_at`, `state`, `navigation`, and `signals` — see [spec](spec/v0.1.0/README.md).)*
 
 **AOM's answer:**
 
@@ -198,7 +200,7 @@ For the full matrix of CLI and script-level commands, see [COMMANDS.md](COMMANDS
 4. **State-aware** — Workflow position and context tracked.
 5. **Layout-free** — No CSS, coordinates, or visual information.
 6. **Semantic-only** — Pure meaning, zero presentation noise.
-7. **Automation guardrails** — `forbidden` / READY (`allowed`) / OPEN (`open`) control how agents may use the surface.
+7. **Automation guardrails** — `forbidden` / `allowed` (with guardrails) / `open` control how agents may use the surface.
 
 ---
 
@@ -260,7 +262,7 @@ Key entrypoints: `aom.py`, `aom.mjs`, and [COMMANDS.md](COMMANDS.md).
 3. Reference plugins (WordPress, Next.js, Nuxt, Gatsby, Shopify, static-site) and the browser extension are available at [aom.tools](https://aom.tools); direct downloads: [plugins and extension](#community-and-support) in Community and Support.
 4. Optional: use [policy badges](https://www.agentobjectmodel.org/static/USAGE.html) to signal automation policy to users (usage guide and copy-paste HTML on the site).
 
-In **`automation_policy: "allowed"` (READY)** mode you decide which actions the agent can see and perform: if you do **not** include a password reset or change-password flow in the surface’s `tasks` / `actions`, a conforming agent cannot invoke those operations or see the associated sensitive state. You can keep higher‑risk flows on separate surfaces with stricter policy or A2H requirements.
+In **`automation_policy: "allowed"`** (with guardrails) you decide which actions the agent can see and perform: if you do **not** include a password reset or change-password flow in the surface’s `tasks` / `actions`, a conforming agent cannot invoke those operations or see the associated sensitive state. You can keep higher‑risk flows on separate surfaces with stricter policy or A2H requirements.
 
 ### For implementers
 
@@ -276,7 +278,7 @@ In **`automation_policy: "allowed"` (READY)** mode you decide which actions the 
 
 | Example | Purpose | Location |
 |---------|---------|----------|
-| **Login single** | Single-shot sign-in surface (READY guardrails) | `examples/v0.1.0/login-single/` |
+| **Login single** | Single-shot sign-in surface (`allowed`, with guardrails) | `examples/v0.1.0/login-single/` |
 | **Ecom flow** | Multi-step checkout flow | `examples/v0.1.0/ecom-flow/` |
 | **Forbidden page template** | Page-level no-automation (minimal valid surface) | [examples/v0.1.0/_forbidden-page-template/](examples/v0.1.0/_forbidden-page-template/) — `aom-policy.forbidden.page.aom.json` |
 
@@ -299,7 +301,7 @@ Quick start: run `python aom.py --help` or `node aom.mjs --help` from the repo r
 
 ## Roadmap
 
-- **v0.1.0 (current)** — Spec, schemas, validators, create-outputs, demo agents, site policy, automation guardrails (forbidden / READY / OPEN).
+- **v0.1.0 (current)** — Spec, schemas, validators, create-outputs, demo agents, site policy, automation guardrails (`forbidden` / `allowed` / `open`).
 - **Next** — Secure payloads (future, documented elsewhere); more examples. Plugins and browser extension: [aom.tools](https://aom.tools).
 
 See [CHANGELOG.md](CHANGELOG.md) for release history.
@@ -331,7 +333,7 @@ MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in
 
 ## Why AOM?
 
-- **For AI agents** — Less token waste, explicit tasks and actions, automation guardrails (READY vs OPEN), support for multi-step flows.
+- **For AI agents** — Less token waste, explicit tasks and actions, automation guardrails (`allowed` with guardrails vs `open`), support for multi-step flows.
 - **For developers** — Agent-ready surfaces, clear contracts, validators and CLI to adopt the spec quickly.
 - **For users** — More predictable agent behavior and transparency via AOM and site policy.
 
@@ -339,16 +341,17 @@ MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in
 
 ## White paper
 
-A concise overview of AOM motivation, architecture, Input/Output AOM, automation policy, and adoption is available as an HTML white paper: [Agent Object Model v0.1.0](whitepaper/agent-object-model.html).
+[Agent Object Model v0.1.0 — white paper](whitepaper/agent-object-model.html) (same link as in the introduction above): motivation, architecture, Input/Output AOM, automation policy at a glance (with figure), and adoption.
 
 ---
 
 ## Community and Support
 
+- **Updates on X**: [@AOMstandards](https://x.com/AOMstandards)
 - **Spec and standards**: [standards@agentobjectmodel.org](mailto:standards@agentobjectmodel.org)
 - **Key docs**: [spec/v0.1.0/README.md](spec/v0.1.0/README.md), [spec/well-known-policy.md](spec/well-known-policy.md), [tools/README.md](tools/README.md), [COMMANDS.md](COMMANDS.md), [CONTRIBUTING.md](CONTRIBUTING.md)
-- **White paper**: [Agent Object Model v0.1.0 (HTML)](whitepaper/agent-object-model.html) — motivation, architecture, Input/Output AOM, policy, and adoption.
+- **White paper**: [Agent Object Model v0.1.0 (HTML)](whitepaper/agent-object-model.html) — linked at the top of this README; full narrative and policy figure.
 - **Trademark**: [static/TRADEMARK-NOTICE.md](static/TRADEMARK-NOTICE.md)
-- **Badges**: [Usage guide and HTML examples](https://www.agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, AOM Ready, No Automation. [Theme test page](https://www.agentobjectmodel.org/static/badge-test.html) (light/dark, copy-paste). Example (links to guide):
+- **Badges**: [Usage guide and HTML examples](https://www.agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, allowed (with guardrails), No Automation. [Theme test page](https://www.agentobjectmodel.org/static/badge-test.html) (light/dark, copy-paste). Example (links to guide):
   <a href="https://www.agentobjectmodel.org/static/USAGE.html"><img src="https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg" alt="AOM Open" width="48" height="48"></a>
-- **tools and integrations** (aom.tools): plugins, browser extension, and agent kits — see [AOM Tools downloads](https://www.aom.tools/downloads/) for the latest links.
+- **tools and integrations** (aom.tools): plugins, browser extension, and agent kits — see [AOM Tools downloads](https://aom.tools/downloads/) for the latest links.

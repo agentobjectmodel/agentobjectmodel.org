@@ -16,7 +16,7 @@ Use these badges according to your AOM automation policy:
   - Use the **No Automation** badge.
 
 - `automation_policy = "allowed"`
-  - Optionally use the **AOM™ Ready** badge.
+  - Optionally use the **allowed (with guardrails)** badge (AOM™ mark).
 
 - `automation_policy = "open"`
   - Use the **AOM™ Open** badge (recommended for public, agent-friendly surfaces).
@@ -37,11 +37,11 @@ https://www.agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automati
 https://www.agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.svg
 ```
 
-### AOM™ Ready (allowed)
+### Allowed (with guardrails)
 
 ```text
-https://www.agentobjectmodel.org/static/aom-badges/ready/aom-ready.png
-https://www.agentobjectmodel.org/static/aom-badges/ready/aom-ready.svg
+https://www.agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.png
+https://www.agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg
 ```
 
 ### AOM™ Open
@@ -64,11 +64,11 @@ You may reference these URLs directly or host copies on your own domain.
      alt="No Automation (AOM)" width="48" height="48">
 ```
 
-### AOM™ Ready (allowed)
+### Allowed (with guardrails)
 
 ```html
-<img src="https://www.agentobjectmodel.org/static/aom-badges/ready/aom-ready.svg"
-     alt="Agent automation allowed (AOM Ready)" width="48" height="48">
+<img src="https://www.agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg"
+     alt="Agent automation allowed (with guardrails)" width="48" height="48">
 ```
 
 ### AOM™ Open
@@ -117,8 +117,8 @@ You can also place badges near primary actions:
 ```html
 <button class="primary">
   Submit Order
-  <img src="https://www.agentobjectmodel.org/static/aom-badges/ready/aom-ready.svg"
-       alt="AOM Ready" width="16" height="16">
+  <img src="https://www.agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg"
+       alt="Automation allowed (with guardrails)" width="16" height="16">
 </button>
 ```
 

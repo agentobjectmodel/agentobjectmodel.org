@@ -13,7 +13,7 @@ This directory contains the complete JSON Schema definitions for the Agent Objec
 **Key sections**:
 - `automation_policy` — (Required) Agent automation policy for a surface: `forbidden` \| `allowed` \| `open`. Conceptually:
   - `forbidden` — No automation; agents may read only enough AOM/policy to learn this rule, then MUST stop using this surface.
-  - `allowed` — **READY / guardrailed mode**; agents MUST treat the AOM as the only source of truth for actions and MUST NOT act based on DOM/HTML or other page content outside the AOM.
+  - `allowed` — **Allowed (with guardrails)**; agents MUST treat the AOM as the only source of truth for actions and MUST NOT act based on DOM/HTML or other page content outside the AOM.
   - `open` — Permissive mode; agents MAY go beyond the AOM’s explicit actions, using additional page content to infer reasonable actions (while still obeying global safety rules).
 - `generated_at` — (Required) ISO 8601 timestamp when this AOM document was generated.
 - `calling_agent` — (Optional) Identifies the agent requesting this surface and/or declares that when the agent submits a request on this site it must include `agent_id` (and optionally `agent_name`) in that request; standard field names are `agent_id` and `agent_name`. See [Agent identity and traceability](#agent-identity-and-traceability).
@@ -45,7 +45,7 @@ This directory contains the complete JSON Schema definitions for the Agent Objec
 
 **Use when**: Building agents that operate on AOM surfaces.
 
-**Secure/signed payloads** are out of scope for this spec; any standard for signed envelopes or verification will be defined elsewhere.
+**Secure/signed payloads** are out of scope for this spec.
 
 ## AOM Contracts
 

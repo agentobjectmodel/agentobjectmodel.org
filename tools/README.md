@@ -57,7 +57,7 @@ From repo root, if you need to call scripts directly instead of the CLI:
 
 ## AOM Surface Explorer (browser extension) and plugins
 
-**Downloads (aom.tools):** See [AOM Tools downloads](https://www.aom.tools/downloads/) for the latest plugins, browser extension, and agent kits.
+**Downloads (aom.tools):** See [AOM Tools downloads](https://aom.tools/downloads/) for the latest plugins, browser extension, and agent kits.
 
 The **AOM Surface Explorer** is a companion Chrome/Chromium extension (shipped separately from this repo) that helps you **see and export** AOM surfaces directly from live pages.
 

@@ -28,12 +28,12 @@
 <body>
 
   <h1>Agent Object Model™ (AOM)™ v0.1.0</h1>
-  <p class="meta">White Paper · Author: standards@agentobjectmodel.org</p>
+  <p class="meta">White Paper · Author: standards@agentobjectmodel.org · Updates: <a href="https://x.com/AOMstandards">@AOMstandards on X</a></p>
 
   <h2>Executive Summary</h2>
   <p>AI agents need to read and act on web content, but the web was designed for human eyes. Today agents consume raw HTML, unstable DOM structures, and visual layouts with little explicit information about tasks, workflows, or safety constraints—leading to brittle automations, wasted tokens, and limited trust.</p>
   <p>The Agent Object Model (AOM) is a task-centric, entity-driven JSON standard for representing web pages and application screens as automation-aware “surfaces”. Agents consume structured AOM documents that describe purpose, tasks, entities, actions, state, navigation, and signals, with explicit automation policies. AOM clearly separates <strong>Input AOM</strong> (published and owned by site and application owners) from <strong>Output AOM</strong> (produced and owned by agent owners and orchestrators).</p>
-  <p>This white paper introduces the motivation, architecture, Input and Output AOM models, automation policy, and adoption path. The canonical specification, schemas, and reference validators are hosted at <a href="https://www.agentobjectmodel.org">agentobjectmodel.org</a>; plugins, agent kits, and a browser extension are available at <a href="https://www.aom.tools">aom.tools</a>. The goal is a neutral, implementation-friendly foundation for agent-friendly web experiences.</p>
+  <p>This white paper introduces the motivation, architecture, Input and Output AOM models, automation policy, and adoption path. The canonical specification, schemas, and reference validators are hosted at <a href="https://www.agentobjectmodel.org">agentobjectmodel.org</a>; plugins, agent kits, and a browser extension are available at <a href="https://aom.tools">aom.tools</a>. The goal is a neutral, implementation-friendly foundation for agent-friendly web experiences.</p>
 
   <h2>1. Background: Agents on a Human-Centric Web</h2>
   <p>Most agents operate at the HTML or DOM level, receiving pages full of layout markup, CSS, scripts, and ads. Element identifiers change between renders; there is no standard way to declare what tasks a page supports or what constitutes success or failure. Consequences include token waste, brittle selectors, poor task awareness, multi-step fragility, and limited safety controls. Existing structured data (schema.org, ARIA, microformats) helps with content description and accessibility but does not provide a complete model of interactive workflows or automation policy. AOM addresses these gaps.</p>
@@ -49,15 +49,22 @@
     <li><strong>Site policy:</strong> A well-known JSON resource (e.g. <code>/.well-known/aom-policy.json</code>) advertising the site’s default automation policy.</li>
   </ul>
 
-  <h3>2.3 Ownership and Flow</h3>
+  <h3>2.3 Automation policy at a glance</h3>
+  <p>Every surface declares an <code>automation_policy</code> with exactly one of three values: <code>forbidden</code>, <code>allowed</code>, or <code>open</code>. The ecosystem also publishes optional <strong>policy badges</strong> so people can see posture at a glance; agents always use the JSON field as the source of truth.</p>
+  <figure>
+    <img src="policy-badges.png" alt="Three AOM automation modes: no automation (forbidden), allowed with guardrails, open (full access).">
+    <figcaption>Visual summary of the three <code>automation_policy</code> values. On-screen labels are illustrative; the normative definitions are in the specification and schemas.</figcaption>
+  </figure>
+
+  <h3>2.4 Ownership and Flow</h3>
   <p>Input AOM flows from sites to agents; Output AOM flows from agents to the orchestrator and user. Sites do not store or interpret agent-internal reasoning. The following diagram summarizes where AOM applies.</p>
   <figure>
     <img src="aom-the-where-it-works.png" alt="Diagram: where Input AOM and Output AOM apply (sites, agents, users).">
     <figcaption>Input AOM is published by sites; Output AOM is produced by agents and owned by agent owners.</figcaption>
   </figure>
 
-  <h3>2.4 Hosting and Ecosystem</h3>
-  <p>The canonical specification, schemas, examples, and reference validators are at <a href="https://www.agentobjectmodel.org">agentobjectmodel.org</a> (versioned spec documents, JSON schemas for Input AOM, Output AOM, and site policies, example surfaces, and Python/Node CLI tools for validation). Complementary tooling—plugins for web frameworks, agent kits, and a browser extension for inspecting and exporting AOM—is available at <a href="https://www.aom.tools">aom.tools</a>. The ecosystem is designed so any framework or runtime can adopt the standard without being tied to a specific vendor.</p>
+  <h3>2.5 Hosting and Ecosystem</h3>
+  <p>The canonical specification, schemas, examples, and reference validators are at <a href="https://www.agentobjectmodel.org">agentobjectmodel.org</a> (versioned spec documents, JSON schemas for Input AOM, Output AOM, and site policies, example surfaces, and Python/Node CLI tools for validation). Complementary tooling—plugins for web frameworks, agent kits, and a browser extension for inspecting and exporting AOM—is available at <a href="https://aom.tools">aom.tools</a>. The ecosystem is designed so any framework or runtime can adopt the standard without being tied to a specific vendor.</p>
 
   <h2>3. Input AOM Surface Model</h2>
   <h3>3.1 Structure of a Surface</h3>
@@ -106,11 +113,11 @@
 }</code></pre>
 
   <h2>5. Automation Policy and Guardrails</h2>
-  <p>A site-wide policy document at <code>/.well-known/aom-policy.json</code> declares the default automation behavior for the domain. Per-surface <code>automation_policy</code> refines or overrides it: <strong>forbidden</strong> (no automation); <strong>allowed</strong> (READY—agents act only through AOM-defined tasks and actions); <strong>open</strong> (permissive; agents may go beyond AOM when reasonable). The AOM ecosystem includes visual badges (AOM Open, AOM Ready, No Automation) and usage guidance for sites that wish to signal policy to users.</p>
+  <p>Figure in §2.3 summarizes the three modes. Normatively, a site-wide policy document at <code>/.well-known/aom-policy.json</code> declares the default automation behavior for the domain. Per-surface <code>automation_policy</code> refines or overrides it. <strong>forbidden</strong>: no automation on that surface. <strong>allowed</strong>: automation with guardrails—agents act only through AOM-defined tasks and actions. <strong>open</strong>: permissive; agents may go beyond the AOM when reasonable while obeying global safety rules and explicit prohibitions. Optional badge assets and HTML examples for publishers are maintained on the <a href="https://www.agentobjectmodel.org/static/USAGE.html">usage guide</a> at agentobjectmodel.org.</p>
 
   <h2>6. Tooling and Developer Experience</h2>
   <p><strong>agentobjectmodel.org</strong> hosts the primary reference: versioned spec documents, JSON schemas for surfaces and outputs and site policies, example surfaces and outputs (login, e‑commerce, forbidden pages), and Python/Node CLIs (<code>aom.py</code>, <code>aom.mjs</code>) for validation, golden-output generation, and demo agents. Supporting docs include COMMANDS.md and CONTRIBUTING.md.</p>
-  <p><strong>aom.tools</strong> aggregates developer-facing resources: plugins for web frameworks (e.g. WordPress, Next.js, Nuxt, Gatsby, Shopify, static sites), agent kits (Python, Node), and a browser extension for inspecting pages and exporting AOM. Downloads and documentation are available at <a href="https://www.aom.tools/downloads/">aom.tools/downloads</a>. These tools are complementary to the core spec and can be extended or replaced by third-party implementations.</p>
+  <p><strong>aom.tools</strong> aggregates developer-facing resources: plugins for web frameworks (e.g. WordPress, Next.js, Nuxt, Gatsby, Shopify, static sites), agent kits (Python, Node), and a browser extension for inspecting pages and exporting AOM. Downloads and documentation are available at <a href="https://aom.tools/downloads/">aom.tools/downloads</a>. These tools are complementary to the core spec and can be extended or replaced by third-party implementations.</p>
 
   <h2>7. Incremental Adoption</h2>
   <p>Adoption can proceed incrementally: (1) Start with one high-value surface (e.g. login or a funnel step). (2) Define the Input AOM surface using the reference schemas and examples. (3) Serve a site policy at <code>/.well-known/aom-policy.json</code>. (4) Validate with the reference CLI tools. (5) Connect agent frameworks to AOM surfaces. (6) Expand coverage and refine policies as needed.</p>
@@ -123,7 +130,7 @@
 
   <h2>10. Benefits and Conclusion</h2>
   <p><strong>Site owners</strong> gain safer automation, clearer agent behavior, and easier debugging via explicit policies and structured signals. <strong>Agent developers</strong> can reduce prompt complexity, implement reusable policies across sites, and rely on standardized output formats. <strong>End users</strong> benefit from more predictable and transparent agent behavior and visible guardrails.</p>
-  <p>The Agent Object Model offers a practical path from a human-centric, DOM-centric web to an agent-friendly, task-centric one. By separating Input AOM (site-owned) from Output AOM (agent-owned) and supporting clear automation policies, AOM enables safer, more reliable automation while preserving implementation flexibility. Implementers can start by exposing at least one surface, validating it, and connecting an agent that emits Output AOM. The canonical specification and tools are at <a href="https://www.agentobjectmodel.org">agentobjectmodel.org</a>; additional tooling and downloads are at <a href="https://www.aom.tools">aom.tools</a>.</p>
+  <p>The Agent Object Model offers a practical path from a human-centric, DOM-centric web to an agent-friendly, task-centric one. By separating Input AOM (site-owned) from Output AOM (agent-owned) and supporting clear automation policies, AOM enables safer, more reliable automation while preserving implementation flexibility. Implementers can start by exposing at least one surface, validating it, and connecting an agent that emits Output AOM. The canonical specification and tools are at <a href="https://www.agentobjectmodel.org">agentobjectmodel.org</a>; additional tooling and downloads are at <a href="https://aom.tools">aom.tools</a>.</p>
 
 </body>
 </html>

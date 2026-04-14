@@ -3,8 +3,8 @@
 The AOM™ name, the term “Agent Object Model™”, and any related word marks or
 design marks may also be protected. Registration has been applied for; the marks are not yet registered.
 
-The **badge graphics** in this directory (including “No Automation”, “AOM™ Ready”,
-and “AOM™ Open” icons) are licensed under **CC0 1.0 Universal (Public Domain
+The **badge graphics** in this directory (including “No Automation”, “allowed (with guardrails)”
+(AOM™ mark), and “AOM™ Open” icons) are licensed under **CC0 1.0 Universal (Public Domain
 Dedication)**. You may:
 
 - Use the badges freely on your websites, apps, and documentation.
