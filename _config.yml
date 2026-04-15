@@ -1,5 +1,5 @@
 # GitHub Pages (Jekyll): include paths Jekyll would otherwise skip (underscore/dot dirs)
 include:
-  - .well-known
-  - spec/v0.1.0/templates/site-policy/.well-known
-  - examples/v0.1.0/_forbidden-page-template
+  - /.well-known
+  - /spec/v0.1.0/templates/site-policy/.well-known
+  - /examples/v0.1.0/_forbidden-page-template
