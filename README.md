@@ -23,7 +23,7 @@ Agent Object Model and AOM are trademarks; registration has been filed. See [Tra
 - [Repository Structure](#repository-structure)
 - [Getting Started](#getting-started)
 - [Examples](#examples)
-- [tools and validators](#tools-and-validators)
+- [Tools and Validators](#tools-and-validators)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [License](#license)
