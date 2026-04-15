@@ -1,0 +1,15 @@
+{
+  "mode": "single",
+  "action": {
+    "action_id": "none",
+    "params": {}
+  },
+  "meta": {
+    "done": true,
+    "confidence": 0.9
+  },
+  "thought": "Proceeding with default task action.",
+  "result": {
+    "ok": true
+  }
+}
