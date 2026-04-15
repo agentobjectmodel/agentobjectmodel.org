@@ -21,5 +21,5 @@ This directory is the placeholder for official AOM™ logo and badge assets. Fin
 
 ## Asset status
 
-- **No-automation and other badges:** Logo designs and files are published at https://agentobjectmodel.org under `static/aom-badges/`; usage guidelines above are authoritative.
+- **No-automation and other badges:** Canonical usage and copy-paste HTML: https://agentobjectmodel.org/static/USAGE.md. Canonical asset URLs are under `https://agentobjectmodel.org/static/aom-badges/<policy>/...` (directory listings may not be served).
 - **Updates:** When assets change, this README and `static/USAGE.md` will be updated with file names and formats. Discussion and final asset specs: https://agentobjectmodel.org (community and standards).
