@@ -1,4 +1,10 @@
-# GitHub Pages (Jekyll): include paths Jekyll would otherwise skip (underscore/dot dirs)
+# GitHub Pages (Jekyll)
+#
+# If a file named `.nojekyll` exists at the site root, GitHub Pages does NOT run Jekyll and
+# this entire file is ignored — `include` will not run. Remove `.nojekyll` when you need
+# the paths below to be published (underscore/dot directories are skipped by Jekyll by default).
+#
+# https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#static-site-generators
 include:
   - .well-known
   - spec/v0.1.0/templates/site-policy/.well-known
