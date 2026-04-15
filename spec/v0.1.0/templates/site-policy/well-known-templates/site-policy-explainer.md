@@ -1,5 +1,7 @@
 # AOM™ Site Policy – /.well-known/aom-policy.json
 
+In this repository, the copy-ready JSON templates next to this file live in **`well-known-templates/`** (served on your site at **`/.well-known/aom-policy.json`** after you copy one file to your origin). The folder name avoids a leading dot so GitHub Pages (Jekyll 3) publishes it.
+
 The `/.well-known/aom-policy.*.site.json` endpoint declares a site's **default automation policy**
 for all AOM™/ASM surfaces that do not specify their own `automation_policy`.
 

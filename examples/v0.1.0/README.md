@@ -11,7 +11,7 @@ node   aom.mjs validate all --examples-dir examples/v0.1.0
 
 ## Layout
 
-- **[login-single](login-single/)**, **[ecom-flow](ecom-flow/)** — Surfaces and their `outputs/`.
+- **[login-single](login-single/)**, **[ecom-flow](ecom-flow/)**, **[forbidden-page-template](forbidden-page-template/)** — Surfaces and their `outputs/` (forbidden template is page-level policy only).
 - **[demo-agents/](demo-agents/README.md)** — Demo agents (Python + Node).
 - **Site policy templates** — Ready-to-copy JSON templates live under [spec/v0.1.0/templates/site-policy/](../../spec/v0.1.0/templates/site-policy/).
 

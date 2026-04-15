@@ -229,7 +229,7 @@ agentobjectmodel.org/
 │   │   └── templates/site-policy/
 │   └── well-known-policy.md
 ├── examples/
-│   └── v0.1.0/                   # login-single, ecom-flow, _forbidden-page-template (minimal *.aom.json), demo-agents
+│   └── v0.1.0/                   # login-single, ecom-flow, forbidden-page-template (minimal *.aom.json), demo-agents
 ├── tools/                        # Python + Node: validate, create-outputs, testing
 ├── static/                      # Badges, USAGE.md, badge-test.html, TRADEMARK-NOTICE.md
 ├── .well-known/                 # Example site policy JSON
@@ -280,7 +280,7 @@ In **`automation_policy: "allowed"`** (with guardrails) you decide which actions
 |---------|---------|----------|
 | **Login single** | Single-shot sign-in surface (`allowed`, with guardrails) | [examples/v0.1.0/login-single/](examples/v0.1.0/login-single/) |
 | **Ecom flow** | Multi-step checkout flow | [examples/v0.1.0/ecom-flow/](examples/v0.1.0/ecom-flow/) |
-| **Forbidden page template** | Page-level no-automation (minimal valid surface) | [examples/v0.1.0/_forbidden-page-template/](examples/v0.1.0/_forbidden-page-template/) — `aom-policy.forbidden.page.aom.json` |
+| **Forbidden page template** | Page-level no-automation (minimal valid surface) | [examples/v0.1.0/forbidden-page-template/](examples/v0.1.0/forbidden-page-template/) — `aom-policy.forbidden.page.aom.json` |
 
 Demo agents (Python + Node) that consume surfaces and produce conformant outputs live in [examples/v0.1.0/demo-agents/](examples/v0.1.0/demo-agents/).
 

@@ -1,11 +1,11 @@
-# GitHub Pages (Jekyll)
+# GitHub Pages (Jekyll 3.x, same engine as github.com/pages/versions)
 #
-# If a file named `.nojekyll` exists at the site root, GitHub Pages does NOT run Jekyll and
-# this entire file is ignored — `include` will not run. Remove `.nojekyll` when you need
-# the paths below to be published (underscore/dot directories are skipped by Jekyll by default).
+# - If `.nojekyll` exists at the site root, GitHub Pages skips Jekyll entirely and this file
+#   is ignored (use an empty `.nojekyll` only when you want a fully static deploy).
+# - Jekyll skips root entries whose names start with `.` unless listed under `include`.
+#   Nested paths like `spec/.../.well-known/` are NOT reliably includable on Jekyll 3.10
+#   (GitHub Pages); those templates live under `well-known-templates/` instead.
 #
 # https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#static-site-generators
 include:
-  - .well-known
-  - spec/v0.1.0/templates/site-policy/.well-known
-  - examples/v0.1.0/_forbidden-page-template
+  - ".well-known"

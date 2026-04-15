@@ -38,8 +38,8 @@ Use one of these as the content for `/.well-known/aom-policy.json`:
 
 | Policy | Template |
 |--------|----------|
-| Forbidden | [v0.1.0/templates/site-policy/.well-known/aom-policy.forbidden.site.json](v0.1.0/templates/site-policy/.well-known/aom-policy.forbidden.site.json) |
-| Allowed | [v0.1.0/templates/site-policy/.well-known/aom-policy.allowed.site.json](v0.1.0/templates/site-policy/.well-known/aom-policy.allowed.site.json) |
-| Open | [v0.1.0/templates/site-policy/.well-known/aom-policy.open.site.json](v0.1.0/templates/site-policy/.well-known/aom-policy.open.site.json) |
+| Forbidden | [v0.1.0/templates/site-policy/well-known-templates/aom-policy.forbidden.site.json](v0.1.0/templates/site-policy/well-known-templates/aom-policy.forbidden.site.json) |
+| Allowed | [v0.1.0/templates/site-policy/well-known-templates/aom-policy.allowed.site.json](v0.1.0/templates/site-policy/well-known-templates/aom-policy.allowed.site.json) |
+| Open | [v0.1.0/templates/site-policy/well-known-templates/aom-policy.open.site.json](v0.1.0/templates/site-policy/well-known-templates/aom-policy.open.site.json) |
 
 Update `expires` and optionally `aom_version` before deploying.
