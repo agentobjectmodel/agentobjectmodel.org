@@ -1,6 +1,6 @@
 # Agent Object Model™ (AOM)™ · Spec and tools
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/agentobjectmodel/agentobjectmodel.org/releases) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](https://github.com/agentobjectmodel/agentobjectmodel.org/releases) [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE.md)
 
 > A task-centric, entity-driven JSON standard that gives AI agents a clean, automation-aware view of any web page or surface — with zero layout noise, clear tasks, and explicit policies.
 
@@ -278,8 +278,8 @@ In **`automation_policy: "allowed"`** (with guardrails) you decide which actions
 
 | Example | Purpose | Location |
 |---------|---------|----------|
-| **Login single** | Single-shot sign-in surface (`allowed`, with guardrails) | `examples/v0.1.0/login-single/` |
-| **Ecom flow** | Multi-step checkout flow | `examples/v0.1.0/ecom-flow/` |
+| **Login single** | Single-shot sign-in surface (`allowed`, with guardrails) | [examples/v0.1.0/login-single/](examples/v0.1.0/login-single/) |
+| **Ecom flow** | Multi-step checkout flow | [examples/v0.1.0/ecom-flow/](examples/v0.1.0/ecom-flow/) |
 | **Forbidden page template** | Page-level no-automation (minimal valid surface) | [examples/v0.1.0/_forbidden-page-template/](examples/v0.1.0/_forbidden-page-template/) — `aom-policy.forbidden.page.aom.json` |
 
 Demo agents (Python + Node) that consume surfaces and produce conformant outputs live in [examples/v0.1.0/demo-agents/](examples/v0.1.0/demo-agents/).
@@ -317,7 +317,7 @@ This repo is the reference implementation for the AOM spec. Contributions are we
 
 **How to contribute:**
 
-- Report issues or propose changes (spec, examples, tools).
+- [Report issues](https://github.com/agentobjectmodel/agentobjectmodel.org/issues) or propose changes (spec, examples, tools).
 - Improve documentation, add examples, or enhance tools.
 - Before submitting: run validators and demo tests per [COMMANDS.md](COMMANDS.md).
 
@@ -327,7 +327,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) and [spec/v0.1.0/README.md](spec/v0.1.0/R
 
 ## License
 
-MIT License — see [LICENSE](LICENSE). You may use, modify, and redistribute in commercial and non-commercial projects.
+MIT License — see [LICENSE.md](LICENSE.md). You may use, modify, and redistribute in commercial and non-commercial projects.
 
 ---
 

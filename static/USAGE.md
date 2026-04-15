@@ -6,6 +6,8 @@ The AOM™ policy badges are **official visual indicators** for the
 Badges are optional for UIs (web + mobile).  
 Agents MUST rely on the JSON `automation_policy` value as the source of truth.
 
+For logos, badge layout in this directory, and [badge-test.html](badge-test.html), see [README.md](README.md).
+
 ---
 
 ## Badge mapping

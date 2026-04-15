@@ -137,6 +137,8 @@ The sections below list the underlying script-level commands for reference and a
   node spec/v0.1.0/templates/site-policy/validators/node_validator.js .well-known/aom-policy.open.site.json
   ```
 
+See [spec/v0.1.0/templates/site-policy/validators/README.md](spec/v0.1.0/templates/site-policy/validators/README.md) for what these spec-local scripts do versus the `tools/` validators.
+
 ---
 
 ### 6. Generate golden output files

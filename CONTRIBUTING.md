@@ -63,11 +63,20 @@ When proposing schema changes, please include:
 
 ---
 
+### Releases and changelog
+
+Maintainers use these when tagging versions and publishing on GitHub:
+
+- **[RELEASING.md](RELEASING.md)** — Move tags, draft releases, and coordinate with CHANGELOG.
+- **[release-notes/v0.1.0.md](release-notes/v0.1.0.md)** — Paste-ready notes for the v0.1.0 release (pair with [CHANGELOG.md](CHANGELOG.md)).
+
+---
+
 ### Questions and proposals
 
 If you are unsure whether a change belongs in the spec or in tooling:
 
-- Open an issue describing the problem and desired behavior.
+- Open an issue describing the problem and desired behavior (https://github.com/agentobjectmodel/agentobjectmodel.org/issues).
 - Include concrete JSON examples (AOM surfaces and/or outputs).
 
 Discussions about broader design (new fields, new flows, integrations and tooling) are welcome; the spec should remain focused on **interoperable contracts** between agents and surfaces.

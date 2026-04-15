@@ -3,7 +3,8 @@
 ### v0.1.0 (MVP)
 
 **Status:** Current, unsigned payloads only.  
-**Spec:** [`https://www.agentobjectmodel.org/spec/v0.1.0/`](https://www.agentobjectmodel.org/spec/v0.1.0/)
+**Spec:** [`https://www.agentobjectmodel.org/spec/v0.1.0/`](https://www.agentobjectmodel.org/spec/v0.1.0/)  
+**Release notes (paste-ready):** [release-notes/v0.1.0.md](release-notes/v0.1.0.md)
 
 - **Core spec**
   - Defined the Agent Object Model™ v0.1.0: surfaces, actions, navigation, and automation policies (`allowed`, `open`, `forbidden`).

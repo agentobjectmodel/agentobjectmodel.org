@@ -10,4 +10,6 @@
 | [.well-known/aom-policy.allowed.site.json](.well-known/aom-policy.allowed.site.json) | allowed | Agents may use surfaces when present. |
 | [.well-known/aom-policy.open.site.json](.well-known/aom-policy.open.site.json) | open | Origin publishes AOM in the open by default. |
 
+**Spec-local validators:** Optional thin scripts next to the templates — [validators/README.md](validators/README.md) (same validation as `tools/` validators, different packaging).
+
 **Before deploying:** Set `expires` (ISO 8601). Serve the chosen file at `root/.well-known/` at your origin root.
