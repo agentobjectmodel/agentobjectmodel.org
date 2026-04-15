@@ -2,5 +2,5 @@
   "automation_policy": "open",
   "aom_version": "0.1.0",
   "expires": "2027-03-02T00:00:00Z",
-  "_comment": "Serve at origin as /.well-known/aom-policy.json. Site publishes AOM in the open by default. See spec/well-known-policy.md or https://agentobjectmodel.org/spec/v0.1.0/well-known-policy.md."
+  "_comment": "Serve at origin as /.well-known/aom-policy.json. Site publishes AOM in the open by default. See https://www.agentobjectmodel.org/spec/well-known-policy.html."
 }
