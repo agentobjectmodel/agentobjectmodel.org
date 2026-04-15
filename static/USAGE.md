@@ -1,7 +1,7 @@
 # AOM™ Policy Badges – Usage Guide
 
 The AOM™ policy badges are **official visual indicators** for the
-`automation_policy` field in AOM/ASM surfaces.
+`automation_policy` field in AOM surfaces.
 
 Badges are optional for UIs (web + mobile).  
 Agents MUST rely on the JSON `automation_policy` value as the source of truth.
