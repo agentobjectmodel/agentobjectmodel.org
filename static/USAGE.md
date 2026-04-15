@@ -35,22 +35,22 @@ Each badge has two canonical assets:
 ### No Automation
 
 ```text
-https://www.agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.png
-https://www.agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.svg
+https://agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.png
+https://agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.svg
 ```
 
 ### Allowed (with guardrails)
 
 ```text
-https://www.agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.png
-https://www.agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg
+https://agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.png
+https://agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg
 ```
 
 ### AOM™ Open
 
 ```text
-https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.png
-https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg
+https://agentobjectmodel.org/static/aom-badges/open/aom-open.png
+https://agentobjectmodel.org/static/aom-badges/open/aom-open.svg
 ```
 
 You may reference these URLs directly or host copies on your own domain.
@@ -62,21 +62,21 @@ You may reference these URLs directly or host copies on your own domain.
 ### No Automation (forbidden)
 
 ```html
-<img src="https://www.agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.svg"
+<img src="https://agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.svg"
      alt="No Automation (AOM)" width="48" height="48">
 ```
 
 ### Allowed (with guardrails)
 
 ```html
-<img src="https://www.agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg"
+<img src="https://agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg"
      alt="Agent automation allowed (with guardrails)" width="48" height="48">
 ```
 
 ### AOM™ Open
 
 ```html
-<img src="https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg"
+<img src="https://agentobjectmodel.org/static/aom-badges/open/aom-open.svg"
      alt="Open automation surface (AOM Open)" width="48" height="48">
 ```
 
@@ -109,7 +109,7 @@ For mobile headers or compact UIs, use the same SVG with a smaller size:
 ```html
 <div class="header">
   <h1>Checkout</h1>
-  <img src="https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg"
+  <img src="https://agentobjectmodel.org/static/aom-badges/open/aom-open.svg"
        alt="AOM Open" width="32" height="32">
 </div>
 ```
@@ -119,7 +119,7 @@ You can also place badges near primary actions:
 ```html
 <button class="primary">
   Submit Order
-  <img src="https://www.agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg"
+  <img src="https://agentobjectmodel.org/static/aom-badges/allowed/aom-allowed.svg"
        alt="Automation allowed (with guardrails)" width="16" height="16">
 </button>
 ```

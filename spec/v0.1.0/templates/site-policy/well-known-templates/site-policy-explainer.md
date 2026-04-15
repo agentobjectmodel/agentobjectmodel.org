@@ -90,12 +90,12 @@ Individual surfaces may override the site policy using their own `automation_pol
 ## Schema validation
 
 Validate against:  
-`https://www.agentobjectmodel.org/spec/v0.1.0/site-policy-schema.json`
+`https://agentobjectmodel.org/spec/v0.1.0/site-policy-schema.json`
 
 ## Visual indicators
 
 Sites with `forbidden` policy SHOULD display the official AOM "No Automation" badge:  
-`https://www.agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.svg`
+`https://agentobjectmodel.org/static/aom-badges/no-automation/aom-no-automation.svg`
 
 ---
 *Specification: Agent Object Model v0.1.0*

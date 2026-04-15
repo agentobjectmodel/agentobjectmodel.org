@@ -1,5 +1,5 @@
 {
-  "$id": "https://www.agentobjectmodel.org/spec/v0.1.0/aom-input-schema.json",
+  "$id": "https://agentobjectmodel.org/spec/v0.1.0/aom-input-schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Agent Object Model (AOM) Input Schema",
   "description": "Core schema for representing an interactive surface (screen, modal, panel, widget, drawer) in a task- and entity-centric JSON format for AI agents. When the surface declares agent identity requirements, the agent must include agent_id (and optionally agent_name) in the request it sends to the site when invoking an action.",

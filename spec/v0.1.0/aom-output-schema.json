@@ -1,5 +1,5 @@
 {
-  "$id": "https://www.agentobjectmodel.org/schemas/aom-output.schema.json",
+  "$id": "https://agentobjectmodel.org/schemas/aom-output.schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Agent Object Model (AOM)™ Output Schema",
   "description": "Standardized output envelope for AI agents operating on AOM™ surfaces. Supports confidence scoring, workflow tracking, and native A2H (Agent-to-Human) communication intents.",

@@ -1,6 +1,6 @@
 # AOM™ logos and badges
 
-This directory is the placeholder for official AOM™ logo and badge assets. Final SVG/PNG assets will be published at [www.agentobjectmodel.org](https://www.agentobjectmodel.org) and may be added here. The spec is the single place that defines **meaning** and **usage**; this README summarizes both.
+This directory is the placeholder for official AOM™ logo and badge assets. Final SVG/PNG assets will be published at [agentobjectmodel.org](https://agentobjectmodel.org) and may be added here. The spec is the single place that defines **meaning** and **usage**; this README summarizes both.
 
 ---
 
@@ -21,5 +21,5 @@ This directory is the placeholder for official AOM™ logo and badge assets. Fin
 
 ## Asset status
 
-- **No-automation and other badges:** Logo designs and files are published at https://www.agentobjectmodel.org under `static/aom-badges/`; usage guidelines above are authoritative.
-- **Updates:** When assets change, this README and `static/USAGE.md` will be updated with file names and formats. Discussion and final asset specs: https://www.agentobjectmodel.org (community and standards).
+- **No-automation and other badges:** Logo designs and files are published at https://agentobjectmodel.org under `static/aom-badges/`; usage guidelines above are authoritative.
+- **Updates:** When assets change, this README and `static/USAGE.md` will be updated with file names and formats. Discussion and final asset specs: https://agentobjectmodel.org (community and standards).

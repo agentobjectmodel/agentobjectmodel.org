@@ -8,7 +8,7 @@
 
 **Get the project:** Clone this repo or [download ZIP](https://github.com/agentobjectmodel/agentobjectmodel.org/archive/refs/heads/master.zip) — spec, schemas, examples, and validators in one package. Latest release: [v0.1.0](https://github.com/agentobjectmodel/agentobjectmodel.org/releases).
 
-Agent Object Model and AOM are trademarks; registration has been filed. See [Trademark Notice](static/TRADEMARK-NOTICE.md). This repo is the canonical source for the AOM spec and reference tooling (https://www.agentobjectmodel.org).
+Agent Object Model and AOM are trademarks; registration has been filed. See [Trademark Notice](static/TRADEMARK-NOTICE.md). This repo is the canonical source for the AOM spec and reference tooling (https://agentobjectmodel.org).
 
 ---
 
@@ -260,7 +260,7 @@ Key entrypoints: `aom.py`, `aom.mjs`, and [COMMANDS.md](COMMANDS.md).
 1. Serve `/.well-known/aom-policy.json` (see [well-known-policy.md](spec/well-known-policy.md) and [spec/v0.1.0/templates/site-policy/](spec/v0.1.0/templates/site-policy/)).
 2. Embed AOM or JSON-LD in pages where you want agent automation.
 3. Reference plugins (WordPress, Next.js, Nuxt, Gatsby, Shopify, static-site) and the browser extension are available at [aom.tools](https://aom.tools); direct downloads: [plugins and extension](#community-and-support) in Community and Support.
-4. Optional: use [policy badges](https://www.agentobjectmodel.org/static/USAGE.html) to signal automation policy to users (usage guide and copy-paste HTML on the site).
+4. Optional: use [policy badges](https://agentobjectmodel.org/static/USAGE.html) to signal automation policy to users (usage guide and copy-paste HTML on the site).
 
 In **`automation_policy: "allowed"`** (with guardrails) you decide which actions the agent can see and perform: if you do **not** include a password reset or change-password flow in the surface’s `tasks` / `actions`, a conforming agent cannot invoke those operations or see the associated sensitive state. You can keep higher‑risk flows on separate surfaces with stricter policy or A2H requirements.
 
@@ -352,6 +352,6 @@ MIT License — see [LICENSE.md](LICENSE.md). You may use, modify, and redistrib
 - **Key docs**: [spec/v0.1.0/README.md](spec/v0.1.0/README.md), [spec/well-known-policy.md](spec/well-known-policy.md), [tools/README.md](tools/README.md), [COMMANDS.md](COMMANDS.md), [CONTRIBUTING.md](CONTRIBUTING.md)
 - **White paper**: [Agent Object Model v0.1.0 (HTML)](whitepaper/agent-object-model.html) — linked at the top of this README; full narrative and policy figure.
 - **Trademark**: [static/TRADEMARK-NOTICE.md](static/TRADEMARK-NOTICE.md)
-- **Badges**: [Usage guide and HTML examples](https://www.agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, allowed (with guardrails), No Automation. [Theme test page](https://www.agentobjectmodel.org/static/badge-test.html) (light/dark, copy-paste). Example (links to guide):
-  <a href="https://www.agentobjectmodel.org/static/USAGE.html"><img src="https://www.agentobjectmodel.org/static/aom-badges/open/aom-open.svg" alt="AOM Open" width="48" height="48"></a>
+- **Badges**: [Usage guide and HTML examples](https://agentobjectmodel.org/static/USAGE.html) — policy badges (SVG/PNG) for AOM Open, allowed (with guardrails), No Automation. [Theme test page](https://agentobjectmodel.org/static/badge-test.html) (light/dark, copy-paste). Example (links to guide):
+  <a href="https://agentobjectmodel.org/static/USAGE.html"><img src="https://agentobjectmodel.org/static/aom-badges/open/aom-open.svg" alt="AOM Open" width="48" height="48"></a>
 - **tools and integrations** (aom.tools): plugins, browser extension, and agent kits — see [AOM Tools downloads](https://aom.tools/downloads/) for the latest links.

@@ -19,7 +19,7 @@ pages:
       {
         "automation_policy": "open",
         "aom_version": "0.1.0",
-        "_comment": "www.agentobjectmodel.org is AOM Open"
+        "_comment": "agentobjectmodel.org is AOM Open"
       }
       EOF
     

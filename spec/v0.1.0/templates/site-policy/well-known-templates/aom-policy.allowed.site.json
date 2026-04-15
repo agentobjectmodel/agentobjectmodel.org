@@ -2,5 +2,5 @@
   "automation_policy": "allowed",
   "aom_version": "0.1.0",
   "expires": "2027-03-02T00:00:00Z",
-  "_comment": "Automation allowed. Agents may use surfaces if present. See https://www.agentobjectmodel.org/spec/v0.1.0/well-known-policy.md"
+  "_comment": "Automation allowed. Agents may use surfaces if present. See https://agentobjectmodel.org/spec/v0.1.0/well-known-policy.md"
 }
