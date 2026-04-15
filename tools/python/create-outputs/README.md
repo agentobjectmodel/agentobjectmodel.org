@@ -22,6 +22,11 @@ Optional: `--failed` is accepted for compatibility (failed outputs are always ge
 | Failed    | `<base>.<test_case_name>.failed.output.json`  | One per error test case.   |
 | Escalated | `_<base>.escalated.output.json`               | When the surface has `a2h`.|
 
+## Forbidden surfaces
+
+If a surface declares `automation_policy: "forbidden"`, create-outputs will **not generate outputs** for that surface.
+If `outputs/` already exists, generator-owned output files are **deleted** (unless protected by a `.skip` marker or stored as `*.json.skip`).
+
 ## Protecting hand-edited files
 
 Create a **skip marker**: same name as the output file plus `.skip` (e.g. `_login.success.output.json.skip`). The script will not overwrite that output and will include it in the summary as skipped.

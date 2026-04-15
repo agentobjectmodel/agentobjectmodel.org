@@ -64,14 +64,75 @@ function buildOutputFromAom(aom, opts) {
 
 function isHandEdited(outputPath) { return fs.existsSync(outputPath + ".skip"); }
 
+function isHandEditedAny(outputPath) {
+  if (outputPath.endsWith(".json.skip")) return true;
+  return isHandEdited(outputPath);
+}
+
+function deleteForbiddenOutputs(outputDir) {
+  if (!fs.existsSync(outputDir) || !fs.statSync(outputDir).isDirectory()) return { deleted: 0, preserved: 0 };
+
+  const patterns = [
+    // generator-owned naming conventions
+    /\.output\.json$/i,
+    /\.output\.json\.skip$/i,
+    /\.failed\.output\.json$/i,
+  ];
+
+  let deleted = 0;
+  let preserved = 0;
+
+  for (const name of fs.readdirSync(outputDir)) {
+    const full = path.join(outputDir, name);
+    if (!fs.statSync(full).isFile()) continue;
+    if (!patterns.some((re) => re.test(name))) continue;
+
+    if (isHandEditedAny(full)) {
+      preserved += 1;
+      continue;
+    }
+    // preserve if <file>.skip marker exists
+    if (isHandEdited(full)) {
+      preserved += 1;
+      continue;
+    }
+    try {
+      fs.unlinkSync(full);
+      deleted += 1;
+    } catch {
+      preserved += 1;
+    }
+  }
+
+  // remove empty outputs dir so we "create no files at all"
+  try {
+    if (fs.existsSync(outputDir) && fs.statSync(outputDir).isDirectory() && fs.readdirSync(outputDir).length === 0) {
+      fs.rmdirSync(outputDir);
+    }
+  } catch {}
+
+  return { deleted, preserved };
+}
+
 function ensureOutputsForSurface(surfacePath, examplesDir, generateFailed) {
   const base = baseName(surfacePath);
   const sectionDir = path.dirname(surfacePath);
   const outputDir = path.join(sectionDir, "outputs");
-  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
   const counts = { created: { success: 0, failed: 0, escalated: 0 }, skipped: { success: 0, failed: 0, escalated: 0 } };
   let aom;
   try { aom = JSON.parse(fs.readFileSync(surfacePath, "utf-8")); } catch (e) { console.error("  Error: " + surfacePath + " - " + e.message); return counts; }
+
+  if ((aom.automation_policy || "").toLowerCase() === "forbidden") {
+    const { deleted, preserved } = deleteForbiddenOutputs(outputDir);
+    let msg = `  [skip] ${path.relative(REPO_ROOT, surfacePath)} (forbidden: no automation`;
+    if (deleted || preserved) msg += `; deleted ${deleted}, preserved ${preserved}`;
+    msg += `)`;
+    console.log(msg);
+    counts.skipped.success = 1;
+    return counts;
+  }
+
+  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
   const testCases = (aom.signals && aom.signals.test_cases) || [];
   let successExpected = null;
   for (const tc of testCases) { if (tc.name === "success" && !(tc.errors && tc.errors.length)) { successExpected = tc.expected; break; } }

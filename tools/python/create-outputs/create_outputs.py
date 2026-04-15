@@ -92,11 +92,64 @@ def _is_hand_edited(output_path: Path) -> bool:
     return skip_path.is_file()
 
 
+def _is_hand_edited_any(output_path: Path) -> bool:
+    """
+    Treat both conventions as "hand edited / protected":
+    - <file>.skip marker (our canonical marker)
+    - files that end with .json.skip (existing repo convention in some examples)
+    """
+    if output_path.name.endswith(".json.skip"):
+        return True
+    return _is_hand_edited(output_path)
+
+
+def _delete_forbidden_outputs(output_dir: Path) -> tuple[int, int]:
+    """
+    Delete generated outputs for a forbidden surface.
+    - Deletes only files that match generator naming conventions.
+    - Preserves any file protected by .skip marker or existing .json.skip convention.
+    Returns (deleted_count, preserved_count).
+    """
+    if not output_dir.is_dir():
+        return (0, 0)
+
+    deleted = 0
+    preserved = 0
+
+    patterns = ("*.output.json", "*.output.json.skip", "*.failed.output.json")
+    candidates: set[Path] = set()
+    for pat in patterns:
+        candidates.update(output_dir.glob(pat))
+
+    for p in sorted(candidates):
+        # Preserve if explicitly protected
+        if _is_hand_edited_any(p):
+            preserved += 1
+            continue
+        # If this is a real output file and a marker exists, preserve it
+        if p.suffixes[-2:] == [".output", ".json"] and _is_hand_edited(p):
+            preserved += 1
+            continue
+        try:
+            p.unlink()
+            deleted += 1
+        except Exception:
+            preserved += 1
+
+    # Remove empty outputs dir to ensure we "create no files at all"
+    try:
+        if output_dir.is_dir() and not any(output_dir.iterdir()):
+            output_dir.rmdir()
+    except Exception:
+        pass
+
+    return (deleted, preserved)
+
+
 def ensure_outputs_for_surface(surface_path: Path, examples_dir: Path, generate_failed: bool) -> dict:
     base = _base_name(surface_path)
     section_dir = surface_path.parent
     output_dir = section_dir / "outputs"
-    output_dir.mkdir(parents=True, exist_ok=True)
     counts = {"created": {"success": 0, "failed": 0, "escalated": 0}, "skipped": {"success": 0, "failed": 0, "escalated": 0}}
 
     try:
@@ -105,6 +158,18 @@ def ensure_outputs_for_surface(surface_path: Path, examples_dir: Path, generate_
         print(f"  ❌ Could not read/parse {surface_path}: {e}")
         return counts
 
+    if (aom.get("automation_policy") or "").lower() == "forbidden":
+        deleted, preserved = _delete_forbidden_outputs(output_dir)
+        msg = f"  [skip] {surface_path.relative_to(REPO_ROOT)} (forbidden: no automation"
+        if deleted or preserved:
+            msg += f"; deleted {deleted}, preserved {preserved}"
+        msg += ")"
+        print(msg)
+        # Report as skipped so summaries show something happened.
+        counts["skipped"]["success"] = 1
+        return counts
+
+    output_dir.mkdir(parents=True, exist_ok=True)
     test_cases = (aom.get("signals") or {}).get("test_cases") or []
 
     success_expected = None
