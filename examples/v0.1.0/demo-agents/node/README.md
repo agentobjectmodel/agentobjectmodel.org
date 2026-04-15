@@ -4,6 +4,8 @@ Generic consumer of AOM example outputs. Same behavior as [Python demo-agent](..
 
 **Requirements:** Node 18+. No dependencies.
 
+**Starter:** [`agent_skeleton.mjs`](agent_skeleton.mjs) is a minimal copy-paste script (read surface JSON → write output JSON) you can use outside this repo; it is not used by `demo_agent.js` or the tests.
+
 ## Usage
 
 **Required:** `--folder` and `--test-case`. Use full stem (e.g. `_login.success.output`) or a prefix that matches exactly one (e.g. `_login.success`, `login.captcha_required`). Use `listTestCases(folder)` to see valid ids.
